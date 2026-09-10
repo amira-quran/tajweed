@@ -2,14 +2,15 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تدريب أحكام الراءات</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تدريب أحكام الراءات التفاعلي</title>
     <style>
         :root {
-            --primary: #4a90e2;
-            --success: #2ecc71;
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #27ae60;
             --danger: #e74c3c;
-            --bg: #f5f7fa;
+            --bg: #ecf0f1;
             --text: #333;
         }
         body {
@@ -17,7 +18,7 @@
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,123 +26,184 @@
         }
         .container {
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 25px 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 600px;
-            text-align: center;
+            box-sizing: border-box;
+            position: relative;
         }
+        h2 { text-align: center; color: var(--primary); margin-top: 0; font-size: 1.5rem; }
+        .input-group { margin: 20px 0; text-align: center; }
         input[type="text"] {
-            width: 80%;
-            padding: 10px;
-            margin: 20px 0;
-            border: 2px solid #ddd;
+            width: 90%;
+            padding: 12px;
+            border: 2px solid #bdc3c7;
             border-radius: 8px;
             font-size: 16px;
+            text-align: center;
+            outline: none;
         }
-        button {
-            background-color: var(--primary);
+        input[type="text"]:focus { border-color: var(--secondary); }
+        button.start-btn {
+            background-color: var(--secondary);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 30px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
-            transition: 0.3s;
-            margin: 5px;
+            width: 90%;
+            font-weight: bold;
         }
-        button:hover { background-color: #357abd; }
+        .progress {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .badge {
+            display: inline-block;
+            background-color: #f39c12;
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--primary);
+        }
         .option-btn {
             display: block;
             width: 100%;
             margin: 10px 0;
-            background-color: #f8f9fa;
+            background-color: #fff;
             color: var(--text);
-            border: 2px solid #e9ecef;
+            border: 2px solid #ecf0f1;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: right;
         }
-        .option-btn:hover { background-color: #e2e6ea; }
+        .option-btn:hover:not(:disabled) { border-color: var(--secondary); background-color: #f7f9fa; }
         .correct { background-color: var(--success) !important; color: white !important; border-color: var(--success) !important; }
         .wrong { background-color: var(--danger) !important; color: white !important; border-color: var(--danger) !important; }
         #feedback {
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 15px;
+            padding: 12px;
             border-radius: 8px;
             display: none;
-            font-weight: bold;
+            font-size: 0.95rem;
+            line-height: 1.4;
         }
-        .hidden { display: none; }
-        #next-btn { background-color: #2c3e50; margin-top: 20px; }
+        .next-btn-container { text-align: center; margin-top: 20px; }
+        #next-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+        }
+        .year-footer {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #95a5a6;
+            text-align: left;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        .hidden { display: none !important; }
+        .result-container { text-align: center; }
+        .score-display { font-size: 2rem; color: var(--success); font-weight: bold; margin: 20px 0; }
+        .retry-btn { background-color: #e67e22; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 1rem; width: 100%; margin-top: 15px;}
     </style>
 </head>
 <body>
 
 <div class="container" id="login-screen">
-    <h2>تدريب أحكام الراءات</h2>
-    <p>أدخلي اسمك للبدء:</p>
-    <input type="text" id="student-name" placeholder="الاسم الثلاثي">
-    <br>
-    <button onclick="startQuiz()">ابدأ التدريب</button>
+    <h2>تدريب أحكام الراءات - المستوى الخامس</h2>
+    <div class="input-group">
+        <p>الرجاء إدخال اسمك للبدء:</p>
+        <input type="text" id="student-name" placeholder="الاسم الثلاثي">
+    </div>
+    <div style="text-align: center;">
+        <button class="start-btn" onclick="startQuiz()">ابدأ التدريب</button>
+    </div>
 </div>
 
 <div class="container hidden" id="quiz-screen">
-    <h3 id="question-text"></h3>
+    <div class="progress" id="progress-text"></div>
+    <div id="badge-container"></div>
+    <div class="question-text" id="question-text"></div>
     <div id="options-container"></div>
     
     <div id="feedback"></div>
-    <button id="next-btn" class="hidden" onclick="nextQuestion()">السؤال التالي</button>
+    
+    <div class="next-btn-container">
+        <button id="next-btn" class="hidden" onclick="nextQuestion()">السؤال التالي</button>
+    </div>
+    <div class="year-footer" id="year-footer"></div>
 </div>
 
-<div class="container hidden" id="result-screen">
+<div class="container hidden result-container" id="result-screen">
     <h2>انتهى التدريب!</h2>
-    <p id="student-name-display"></p>
-    <h3>درجتك: <span id="score"></span> / <span id="total-score"></span></h3>
-    <button id="retry-btn" class="hidden" onclick="retryWrongQuestions()">إعادة الأسئلة الخاطئة</button>
+    <p style="font-size: 1.2rem;" id="student-name-display"></p>
+    <div class="score-display"><span id="score"></span> / <span id="total-score"></span></div>
+    <p id="saving-msg" style="color: #7f8c8d;">جاري حفظ النتيجة في السجل...</p>
+    <button id="retry-btn" class="retry-btn hidden" onclick="retryWrongQuestions()">إعادة حل الأسئلة الخاطئة</button>
 </div>
 
 <script>
-    // رابط Google Apps Script الخاص بك
+    // رابط الإكسيل الخاص بك
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz9-dRpBl0rFkrTG0wNm-alTT1DlAAC2Y2HbcRuZYyrWYRqfSgT0UwXt1CF1o41Vvmu/exec";
 
-    // بنك الأسئلة (كل سؤال بدرجتين)
+    // بنك الأسئلة الشامل (مستخرج من ملف الراءات)
     const allQuestions = [
-        {
-            question: "حكم الراء الممالة الترقيق.",
-            options: ["صح", "خطأ"],
-            correctIndex: 0,
-            explanation: "إجابة صحيحة. الراء الممالة حكمها الترقيق وجهاً واحداً مثل كلمة (مَجْرَاهَا)."
-        },
-        {
-            question: "حكم الراء المرامة في حالة الوقف بالضم هو التفخيم.",
-            options: ["صح", "خطأ"],
-            correctIndex: 0,
-            explanation: "إجابة صحيحة. لأن الروم كالوصل، والراء المضمومة تفخم."
-        },
-        {
-            question: "ينقسم الراء من حيث التفخيم والترقيق من مفهوم قول الناظم إلى:",
-            options: ["قسمين", "ثلاثة أقسام", "أربعة أقسام", "خمسة أقسام"],
-            correctIndex: 1,
-            explanation: "ثلاثة أقسام: قسم يفخم دائماً، وقسم يرقق دائماً، وقسم يجوز فيه الوجهان."
-        },
-        {
-            question: "لم يذكر الناظم إلا حكم ترقيق الراء المكسورة وصلاً في عبارته في باب الراءات.",
-            options: ["صح", "خطأ"],
-            correctIndex: 1,
-            explanation: "خطأ. بل ذكر حكم الراء الساكنة بعد كسر، وحكم (فرق)، وحكم إخفاء التكرير."
-        }
+        { q: "حكم الراء الممالة الترقيق.", type: "TF", options: ["صح", "خطأ"], ans: 0, exp: "لأن الراء الممالة ترقق وجهاً واحداً مثل (مجراها).", year: "فبراير 2024م / يونيو 2024م" },
+        { q: "لم يذكر الناظم إلا حكم ترقيق الراء المكسورة وصلا في عبارته في باب الراءات.", type: "TF", options: ["صح", "خطأ"], ans: 1, exp: "بل ذكر أحكام الساكنة بعد كسر، والخلاف في (فرق)، وإخفاء التكرير.", year: "فبراير 2024م / يونيو 2025م / أغسطس 2026م" },
+        { q: "الشاهد من الجزرية على تفخيم الراء الساكنة لكلمة (رب ارجعون) هو:", type: "Fill", options: ["أو كانت الكسرة ليست أصلا", "كذاك بعد الكسر حيث سكنت", "إن لم تكن من قبل حرف استعلا", "والخلف في فرق لكسر يوجد"], ans: 0, exp: "لأن الكسرة قبل الراء هنا كسرة عارضة (ليست أصلا).", year: "فبراير 2024م / ديسمبر 2024م" },
+        { q: "استدل من الجزرية على تفخيم الراء الساكنة بعد ضم، كما في كلمة (القرآن):", type: "Fill", options: ["أو كانت الكسرة ليست أصلا", "كذاك بعد الكسر حيث سكنت", "وَرَقِّقِ الرَّاءَ إِذَا مَا كُسِرَتْ", "إن لم تكن من قبل حرف استعلا"], ans: 1, exp: "يؤخذ من المفهوم المخالف لقوله (كذاك بعد الكسر حيث سكنت).", year: "فبراير 2024م" },
+        { q: "الشاهد من الجزرية على تفخيم الراء الساكنة لكلمة (فرقة) هو:", type: "Fill", options: ["أو كانت الكسرة ليست أصلا", "إن لم تكن من قبل حرف استعلا", "وَأَخْفِ تَكْرِيرًا إِذَا تُشَدَّدُ", "كذاك بعد الكسر حيث سكنت"], ans: 1, exp: "لوقوع حرف الاستعلاء (القاف) بعد الراء الساكنة.", year: "فبراير 2024م / يونيو 2026م" },
+        { q: "الشاهد من الجزرية على خلاف القراء في ترقيق وتفخيم الراء في كلمة (فرق) هو:", type: "Fill", options: ["والخلف في فرق لكسر يوجد", "إن لم تكن من قبل حرف استعلا", "ورقق الراء إذا ما كسرت", "أو كانت الكسرة ليست أصلا"], ans: 0, exp: "نص عليها الناظم صراحة: والخلف في فرق لكسر يوجد.", year: "فبراير 2024م / فبراير 2026م" },
+        { q: "لم يبين الناظم حكم تفخيم الراء صريحة في عبارته إحالة لأصلها التفخيم أو المفهوم المخالف من قوله.", type: "TF", options: ["صح", "خطأ"], ans: 0, exp: "الناظم ركز على الترقيق، وأخذ التفخيم من المفهوم المخالف لأن الأصل التفخيم.", year: "أبريل 2024م / أكتوبر 2025م" },
+        { q: "حكم الراء المرامة في حالة الوقف بالضم هو التفخيم.", type: "TF", options: ["صح", "خطأ"], ans: 0, exp: "الروم كالوصل، والراء المضمومة تفخم وصلاً.", year: "أبريل 2024م / يونيو 2025م / أكتوبر 2025م (معدل)" },
+        { q: "حكم الراء المرامة في حالة الوقف بالكسر الترقيق.", type: "TF", options: ["صح", "خطأ"], ans: 0, exp: "لأن الراء المكسورة ترقق وصلاً، والروم يعامل معاملة الوصل.", year: "يونيو 2024م / أغسطس 2025م" },
+        { q: "الشاهد من الجزرية على تفخيم الراء المضمومة لكلمة (ربما):", type: "Fill", options: ["المفهوم المخالف لـ: ورقق الراء إذا ما كسرت", "المفهوم المخالف لـ: كذاك بعد الكسر حيث سكنت", "أو كانت الكسرة ليست أصلا", "إن لم تكن من قبل حرف استعلا"], ans: 0, exp: "يؤخذ التفخيم من عكس الترقيق المذكور في الشطر الأول.", year: "أبريل 2024م" },
+        { q: "أن يستدل من الجزرية على تفخيم الراء الساكنة بعد كسر عارض متصل (مثل: ارجعي):", type: "Fill", options: ["أو كانت الكسرة ليست أصلا", "إن لم تكن من قبل حرف استعلا", "كذاك بعد الكسر حيث سكنت", "والخلف في فرق لكسر يوجد"], ans: 0, exp: "كسرة همزة الوصل عارضة وليست أصلية.", year: "أبريل 2024م" },
+        { q: "ذهب الجمهور من أهل الأداء إلى أن أصل الراء الترقيق لكثرته.", type: "TF", options: ["صح", "خطأ"], ans: 1, exp: "خطأ. ذهب الجمهور إلى أن أصل الراء هو التفخيم.", year: "أكتوبر 2024م" },
+        { q: "الشاهد من الجزرية على تفخيم الراء الساكنة لكلمة (قرطاس):", type: "Fill", options: ["إن لم تكن من قبل حرف استعلا", "أو كانت الكسرة ليست أصلا", "والخلف في فرق لكسر يوجد", "كذاك بعد الكسر حيث سكنت"], ans: 0, exp: "لأن الطاء حرف استعلاء جاء بعد الراء الساكنة.", year: "أكتوبر 2024م" },
+        { q: "اشترط الناظم لترقيق الراء المكسورة في قوله (ورقق الراء إذا ما كسرت) أن تكون الكسرة أصلية.", type: "TF", options: ["صح", "خطأ"], ans: 1, exp: "خطأ. الناظم اشترط الكسرة الأصلية للراء (الساكنة) وليس للراء المكسورة نفسها.", year: "ديسمبر 2024م / أبريل 2025م" },
+        { q: "ينقسم الراء من حيث التفخيم والترقيق من مفهوم قول الناظم إلى:", type: "MCQ", options: ["قسمين", "ثلاثة أقسام", "أربعة أقسام", "خمسة أقسام"], ans: 1, exp: "قسم يفخم دائماً، قسم يرقق دائماً، وقسم يجوز فيه الوجهان.", year: "ديسمبر 2024م" },
+        { q: "حكم الراء الممالة التفخيم.", type: "TF", options: ["صح", "خطأ"], ans: 1, exp: "خطأ. الراء الممالة ترقق قولاً واحداً.", year: "فبراير 2025م / فبراير 2026م" },
+        { q: "حكم الراء المكسورة في حال الوقف عليها بالروم:", type: "Fill", options: ["التفخيم", "الترقيق", "جواز الوجهين", "الإخفاء"], ans: 1, exp: "ترقق لأن الروم يعامل كالوصل.", year: "فبراير 2025م / فبراير 2026م" },
+        { q: "حكم الراء المرامة هو: التفخيم أو الترقيق بحسب حركتها.", type: "TF", options: ["صح", "خطأ"], ans: 0, exp: "صحيح، تفخم إذا كانت مضمومة وترقق إذا كانت مكسورة.", year: "أبريل 2025م / مايو 2026م" },
+        { q: "الشاهد من الجزرية على تفخيم الراء المضمومة لكلمة (الذكر) وقفاً من قوله تعالى: {وَلَيْسَ الذَّكَرُ كَالْأُنثَى}:", type: "Fill", options: ["المفهوم المخالف لـ: كذاك بعد الكسر حيث سكنت", "أو كانت الكسرة ليست أصلا", "إن لم تكن من قبل حرف استعلا", "والخلف في فرق لكسر يوجد"], ans: 0, exp: "لأنها ساكنة بعد فتح (سكون عارض)، والتفخيم يؤخذ من عكس الترقيق المذكور.", year: "يونيو 2025م / مايو 2026م" }
     ];
 
     let studentName = "";
     let score = 0;
     let currentQuestionIndex = 0;
     let activeQuestions = [];
-    let wrongQuestions = [];
+    let wrongQuestionsLog = []; // لتسجيل نصوص الأسئلة الخاطئة
+    let wrongQuestionsObjects = []; // لإعادة الاختبار
     let isRetryMode = false;
 
     function startQuiz() {
         const nameInput = document.getElementById("student-name").value.trim();
         if (nameInput === "") {
-            alert("الرجاء كتابة الاسم أولاً.");
+            alert("يرجى إدخال اسمك للمتابعة.");
             return;
         }
         studentName = nameInput;
@@ -150,7 +212,8 @@
         
         activeQuestions = [...allQuestions];
         score = 0;
-        wrongQuestions = [];
+        wrongQuestionsLog = [];
+        wrongQuestionsObjects = [];
         currentQuestionIndex = 0;
         loadQuestion();
     }
@@ -160,7 +223,20 @@
         document.getElementById("next-btn").classList.add("hidden");
         
         const q = activeQuestions[currentQuestionIndex];
-        document.getElementById("question-text").innerText = q.question;
+        
+        // الترقيم
+        document.getElementById("progress-text").innerText = `السؤال ${currentQuestionIndex + 1} من ${activeQuestions.length}`;
+        
+        // شارة الأسئلة المقالية
+        const badgeContainer = document.getElementById("badge-container");
+        if(q.type === "Fill" || q.type === "Essay") {
+            badgeContainer.innerHTML = `<span class="badge">سؤال مقالي / أكمل (معدل للاختيارات للتدريب)</span>`;
+        } else {
+            badgeContainer.innerHTML = "";
+        }
+
+        document.getElementById("question-text").innerText = q.q;
+        document.getElementById("year-footer").innerText = `المصدر: اختبارات (${q.year})`;
         
         const optionsContainer = document.getElementById("options-container");
         optionsContainer.innerHTML = "";
@@ -175,7 +251,6 @@
     }
 
     function checkAnswer(selectedIndex, btnElement) {
-        // تعطيل الأزرار بعد الاختيار
         const buttons = document.querySelectorAll(".option-btn");
         buttons.forEach(b => b.disabled = true);
 
@@ -183,24 +258,24 @@
         const feedbackDiv = document.getElementById("feedback");
         feedbackDiv.style.display = "block";
 
-        if (selectedIndex === q.correctIndex) {
+        if (selectedIndex === q.ans) {
             btnElement.classList.add("correct");
-            feedbackDiv.style.backgroundColor = "#d4edda";
-            feedbackDiv.style.color = "#155724";
-            feedbackDiv.innerText = "إجابة صحيحة! أحسنتِ.";
-            if (!isRetryMode) score += 2; // نقطتين لكل سؤال
+            feedbackDiv.style.backgroundColor = "#e8f5e9";
+            feedbackDiv.style.color = "#2e7d32";
+            feedbackDiv.innerText = "إجابة صحيحة ✔️\n" + q.exp;
+            if (!isRetryMode) score += 2; 
         } else {
             btnElement.classList.add("wrong");
-            buttons[q.correctIndex].classList.add("correct"); // إظهار الإجابة الصحيحة
-            feedbackDiv.style.backgroundColor = "#f8d7da";
-            feedbackDiv.style.color = "#721c24";
-            feedbackDiv.innerText = "إجابة خاطئة. " + q.explanation;
+            buttons[q.ans].classList.add("correct"); 
+            feedbackDiv.style.backgroundColor = "#ffebee";
+            feedbackDiv.style.color = "#c62828";
+            feedbackDiv.innerText = "إجابة خاطئة ❌\n" + q.exp;
             
             if (!isRetryMode) {
-                wrongQuestions.push(q);
+                wrongQuestionsLog.push(q.q); // حفظ نص السؤال للتحليل
+                wrongQuestionsObjects.push(q); // حفظ الكائن للإعادة
             }
         }
-
         document.getElementById("next-btn").classList.remove("hidden");
     }
 
@@ -219,26 +294,28 @@
         
         document.getElementById("student-name-display").innerText = "الطالبة: " + studentName;
         document.getElementById("score").innerText = score;
+        
         const totalPossible = isRetryMode ? score : (allQuestions.length * 2);
         document.getElementById("total-score").innerText = allQuestions.length * 2;
 
         const retryBtn = document.getElementById("retry-btn");
-        if (wrongQuestions.length > 0 && !isRetryMode) {
+        if (wrongQuestionsObjects.length > 0 && !isRetryMode) {
             retryBtn.classList.remove("hidden");
         } else {
             retryBtn.classList.add("hidden");
         }
 
-        // إرسال البيانات إلى Google Sheets فقط في المحاولة الأولى
         if (!isRetryMode) {
             sendDataToSheet(totalPossible);
+        } else {
+            document.getElementById("saving-msg").classList.add("hidden");
         }
     }
 
     function retryWrongQuestions() {
         isRetryMode = true;
-        activeQuestions = [...wrongQuestions];
-        wrongQuestions = [];
+        activeQuestions = [...wrongQuestionsObjects];
+        wrongQuestionsObjects = [];
         currentQuestionIndex = 0;
         document.getElementById("result-screen").classList.add("hidden");
         document.getElementById("quiz-screen").classList.remove("hidden");
@@ -249,20 +326,21 @@
         const payload = {
             name: studentName,
             score: score,
-            total: totalPossible
+            total: totalPossible,
+            wrongQuestions: wrongQuestionsLog // إرسال الأسئلة الخاطئة للتحليل
         };
 
         fetch(GOOGLE_SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors', // يتجاهل رسائل خطأ CORS
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
-        }).then(response => {
-            console.log("تم الإرسال بنجاح");
-        }).catch(error => {
-            console.error("خطأ في الإرسال:", error);
+        }).then(() => {
+            document.getElementById("saving-msg").innerText = "تم حفظ النتيجة بنجاح ✔️";
+            document.getElementById("saving-msg").style.color = "#27ae60";
+        }).catch(err => {
+            document.getElementById("saving-msg").innerText = "حدث خطأ أثناء حفظ النتيجة.";
+            document.getElementById("saving-msg").style.color = "#e74c3c";
         });
     }
 </script>
