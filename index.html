@@ -20,6 +20,7 @@
             margin: 0;
             padding: 15px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -33,6 +34,7 @@
             max-width: 650px;
             box-sizing: border-box;
             position: relative;
+            margin-bottom: 20px;
         }
         h2 { text-align: center; color: var(--primary); margin-top: 0; font-size: 1.5rem; }
         .input-group { margin: 20px 0; text-align: center; }
@@ -147,6 +149,21 @@
         .result-container { text-align: center; }
         .score-display { font-size: 2.5rem; color: var(--success); font-weight: bold; margin: 20px 0; }
         .retry-btn { background-color: #e67e22; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 1rem; width: 100%; margin-top: 15px;}
+        /* تصميم التذييل (بيانات المعلمة) */
+        .teacher-footer {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            padding: 10px;
+            max-width: 650px;
+            width: 100%;
+            border-top: 2px solid #ddd;
+            margin-top: auto;
+        }
+        .teacher-footer strong {
+            color: var(--primary);
+        }
     </style>
 </head>
 <body>
@@ -193,6 +210,12 @@
     <button id="retry-btn" class="retry-btn hidden" onclick="retryWrongQuestions()">إعادة حل الأسئلة الخاطئة</button>
 </div>
 
+<!-- توقيع المعلمة أسفل التطبيق -->
+<div class="teacher-footer">
+    إعداد وتصميم المعلمة الأولى: <strong>أميرة محمد السيد</strong> <br>
+    بمركز جويرية بنت الحارث | للاستفسار: 36837886
+</div>
+
 <script>
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz9-dRpBl0rFkrTG0wNm-alTT1DlAAC2Y2HbcRuZYyrWYRqfSgT0UwXt1CF1o41Vvmu/exec";
 
@@ -205,6 +228,9 @@
     const optFirq = "(وَالْخُلْفُ فِي فِرْقٍ لِكَسْرٍ يُوجَدُ)";
     const optMuntashir = "(وَرَقِّقِ الرَّاءَ ...كَذَاكَ بَعْدَ الْكَسْرِ حَيْثُ سَكَنَتْ)";
 
+    // تعليل خاص بالكسرة المنفصلة
+    const expMunfasila = "لأن الكسرة منفصلة. وعلماء التجويد يُدرجون الكسرة المنفصلة تحت حكم قول ابن الجزري: (أَوْ كَانَتِ الْكَسْرَةُ لَيْسَتْ أَصْلاً)؛ لأن الكسرة هنا ليست أصلية في نفس الكلمة التي بها الراء.";
+
     // ---------------- النموذج الأول (20 سؤال) ----------------
     const model1 = [
         { q: "الشاهد من الجزرية على تفخيم الراء الساكنة بعد ضم لكلمة (القربى) هو:", type: "Fill", options: [optSakinaFath, optMaftuha, optIsti3la, optKasrArid], ans: 0, exp: "لأنها ساكنة بعد ضم.", year: "أبريل 2024" },
@@ -214,8 +240,8 @@
         { q: "الشاهد من الجزرية على تفخيم الراء المضمومة لكلمة (الذكر) وقفا هو:", type: "Fill", options: [optSakinaFath, optMaftuha, optIsti3la, optKasrArid], ans: 0, exp: "لأنها ساكنة سكوناً عارضاً بعد فتح.", year: "أبريل 2024" },
         { q: "الشاهد من الجزرية على تفخيم الراء المضمومة لكلمة (الذَّكَرُ) وقفاً من قوله تعالى: {وَلَيْسَ الذَّكَرُ كَالْأُنْثَى} هو:", type: "Fill", options: [optSakinaFath, optMaftuha, optIsti3la, optKasrArid], ans: 0, exp: "لأنها سكنت سكوناً عارضاً بعد فتح.", year: "يونيو 25 / مايو 26" },
         { q: "أن يستدل من الجزرية على تفخيم الراء الساكنة بعد كسر عارض متصل:", type: "Fill", options: [optKasrArid, optMaftuha, optIsti3la, optSakinaFath], ans: 0, exp: "لأن الكسرة عارضة (همزة وصل).", year: "أبريل 2024" },
-        { q: "الشاهد من الجزرية على تفخيم الراء الساكنة لكلمة (إن ارتبتم) هو:", type: "Fill", options: [optKasrArid, optMaftuha, optIsti3la, optSakinaFath], ans: 0, exp: "لأن الكسرة منفصلة في كلمة أخرى.", year: "أبريل 2024" },
-        { q: "الشاهد من المقدمة الجزرية على تفخيم الراء الساكنة في كلمة (إنِ ارْتَبْتُمْ) هو قول الناظم:", type: "Fill", options: [optKasrArid, optMaftuha, optIsti3la, optSakinaFath], ans: 0, exp: "لأن الكسرة منفصلة.", year: "أبريل 2025" },
+        { q: "الشاهد من الجزرية على تفخيم الراء الساكنة لكلمة (إن ارتبتم) هو:", type: "Fill", options: [optKasrArid, optMaftuha, optIsti3la, optSakinaFath], ans: 0, exp: expMunfasila, year: "أبريل 2024" },
+        { q: "الشاهد من المقدمة الجزرية على تفخيم الراء الساكنة في كلمة (إنِ ارْتَبْتُمْ) هو قول الناظم:", type: "Fill", options: [optKasrArid, optMaftuha, optIsti3la, optSakinaFath], ans: 0, exp: expMunfasila, year: "أبريل 2025" },
         { q: "الشاهد من الجزرية على تفخيم الراء الساكنة لكلمة (قرطاس) هو:", type: "Fill", options: [optIsti3la, optMaftuha, optKasrArid, optSakinaFath], ans: 0, exp: "لوقوع حرف الاستعلاء بعدها.", year: "أكتوبر 2024" },
         { q: "الشاهد من الجزرية على تفخيم الراء المضمومة المنونة في كلمة (مستقر) هو:", type: "Fill", options: [optMaftuha, optSakinaFath, optIsti3la, optKasrArid], ans: 0, exp: "لأن الراء مضمومة.", year: "أكتوبر 2024" },
         { q: "الشاهد من الجزرية على تفخيم الراء الساكنة لكلمة (اركعوا) هو:", type: "Fill", options: [optKasrArid, optMaftuha, optIsti3la, optSakinaFath], ans: 0, exp: "لأن الكسرة عارضة.", year: "أكتوبر 24 / فبراير 25" },
@@ -258,9 +284,9 @@
         { q: "الشاهد من الجزرية على تفخيم الراء الساكنة لكلمة (فِرْقَةٍ) هو:", type: "Fill", options: [optIsti3la, optMaftuha, optKasrArid, optSakinaFath], ans: 0, exp: "لوقوع حرف الاستعلاء بعدها.", year: "يونيو 2026" },
         { q: "الشاهد من الجزرية على تفخيم الراء المضمومة هو:", type: "Fill", options: [optMaftuha, optSakinaFath, optKasrArid, optIsti3la], ans: 0, exp: "المفهوم المخالف لترقيق المكسورة.", year: "يونيو 2024" },
         { q: "الشاهد من الجزرية على تفخيم الراء المضمومة هو: المفهوم المخالف لقول الناظم:", type: "Fill", options: [optMaftuha, optSakinaFath, optKasrArid, optIsti3la], ans: 0, exp: "لأنها مضمومة.", year: "أغسطس 25 / مايو 26" },
-        { q: "الشاهد من الجزرية على تفخيم الراء الساكنة في كلمة (أَمِ ارْتَابُوا) هو قول الناظم:", type: "Fill", options: [optKasrArid, optMaftuha, optSakinaFath, optIsti3la], ans: 0, exp: "لأن الكسرة منفصلة عارضة.", year: "أغسطس 2025" },
-        { q: "الشاهد من الجزرية على تفخيم الراء الساكنة لكلمة (رب ارحمهما) هو:", type: "Fill", options: [optKasrArid, optMaftuha, optSakinaFath, optIsti3la], ans: 0, exp: "لأن الكسرة منفصلة عارضة.", year: "يونيو 2024" },
-        { q: "الشاهد من الجزرية على تفخيم الراء الساكنة في كلمة (رَبِّ ارْحَمْهُمَا) هو المفهوم المخالف لقول الناظم:", type: "Fill", options: [optKasrArid, optMaftuha, optSakinaFath, optIsti3la], ans: 0, exp: "لأن الكسرة منفصلة.", year: "أكتوبر 2025" },
+        { q: "الشاهد من الجزرية على تفخيم الراء الساكنة في كلمة (أَمِ ارْتَابُوا) هو قول الناظم:", type: "Fill", options: [optKasrArid, optMaftuha, optSakinaFath, optIsti3la], ans: 0, exp: expMunfasila, year: "أغسطس 2025" },
+        { q: "الشاهد من الجزرية على تفخيم الراء الساكنة لكلمة (رب ارحمهما) هو:", type: "Fill", options: [optKasrArid, optMaftuha, optSakinaFath, optIsti3la], ans: 0, exp: expMunfasila, year: "يونيو 2024" },
+        { q: "الشاهد من الجزرية على تفخيم الراء الساكنة في كلمة (رَبِّ ارْحَمْهُمَا) هو المفهوم المخالف لقول الناظم:", type: "Fill", options: [optKasrArid, optMaftuha, optSakinaFath, optIsti3la], ans: 0, exp: expMunfasila, year: "أكتوبر 2025" },
         { q: "الشاهد من الجزرية على ترقيق الراء في كلمة (رِجَالٌ) هو:", type: "Fill", options: [optMaksura, optMaftuha, optSakinaFath, optKasrArid], ans: 0, exp: "لأنها متحركة بالكسر.", year: "فبراير 2026" },
         { q: "الشاهد من المقدمة الجزرية على تفخيم الراء الساكنة لكلمة (إرصادا) هو:", type: "Fill", options: [optIsti3la, optMaftuha, optKasrArid, optSakinaFath], ans: 0, exp: "لوقوع حرف الاستعلاء.", year: "أغسطس 2026" },
         { q: "الشاهد من الجزرية على تفخيم الراء الساكنة لكلمة (ارصاد) هو:", type: "Fill", options: [optIsti3la, optMaftuha, optKasrArid, optSakinaFath], ans: 0, exp: "لوقوع حرف الاستعلاء.", year: "يونيو 2024" },
