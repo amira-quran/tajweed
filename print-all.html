@@ -2,314 +2,330 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>تدريب أحكام النون والميم المشددتين والميم الساكنة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة الطباعة الشاملة - التجويد</title>
     <style>
-        :root {
-            --primary: #d35400; /* لون برتقالي نحاسي مميز لهذا الباب */
-            --secondary: #e67e22;
-            --success: #27ae60;
-            --danger: #e74c3c;
-            --bg: #fdfaf6;
-            --text: #333;
+        :root { --primary: #2c3e50; --secondary: #34495e; --accent: #2980b9; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #ecf0f1; color: #333; margin: 0; padding: 20px; }
+        .controls { text-align: center; margin-bottom: 30px; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 800px; margin: 0 auto 30px auto; }
+        .controls h1 { color: var(--primary); margin-top: 0; font-size: 1.8rem; border-bottom: 2px solid #ecf0f1; padding-bottom: 15px; }
+        .btn-group { margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef; }
+        .btn-group h3 { margin-top: 0; color: var(--accent); font-size: 1.2rem; }
+        .btn { background-color: #3498db; color: white; border: none; padding: 10px 20px; margin: 5px; border-radius: 5px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background-color: #2980b9; }
+        .btn-teacher { background-color: #27ae60; }
+        .btn-teacher:hover { background-color: #219a52; }
+        
+        .lesson-content { display: none; }
+        
+        .a4-page { width: 210mm; min-height: 297mm; padding: 20mm; margin: 10mm auto; border: 1px #D3D3D3 solid; border-radius: 5px; background: white; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); box-sizing: border-box; }
+        .header { text-align: center; border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
+        .header h2 { margin: 5px 0; color: var(--primary); }
+        .header h3 { margin: 5px 0; color: #555; font-size: 1.1rem;}
+        .student-info { display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: bold; font-size: 1.1rem; }
+        .question-list { list-style-type: none; padding: 0; }
+        .question-list li { margin-bottom: 20px; font-size: 1.1rem; line-height: 1.6; }
+        .answer-blank { color: #bdc3c7; display: block; margin-top: 5px; }
+        .answer-filled { color: var(--accent); font-weight: bold; display: block; margin-top: 5px; }
+        
+        @media print {
+            body { background: white; margin: 0; padding: 0; }
+            .controls { display: none !important; }
+            .a4-page { margin: 0; border: initial; border-radius: initial; width: initial; min-height: initial; box-shadow: initial; page-break-after: always; }
+            .a4-page:last-child { page-break-after: auto; }
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; }
-        .container { background: white; padding: 25px 20px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); width: 100%; max-width: 650px; box-sizing: border-box; position: relative; margin-bottom: 20px; }
-        h2 { text-align: center; color: var(--primary); margin-top: 0; font-size: 1.45rem; line-height: 1.5; }
-        .input-group { margin: 20px 0; text-align: center; }
-        input[type="text"] { width: 90%; padding: 12px; border: 2px solid #bdc3c7; border-radius: 8px; font-size: 16px; text-align: center; outline: none; margin-bottom: 15px; font-family: inherit; }
-        input[type="text"]:focus { border-color: var(--secondary); }
-        button.start-btn { background-color: var(--secondary); color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-size: 16px; width: 90%; font-weight: bold; }
-        .progress-bar-container { width: 100%; background-color: #e0e0e0; border-radius: 8px; margin-bottom: 10px; height: 12px; overflow: hidden; }
-        .progress-bar { height: 100%; background-color: var(--success); width: 0%; transition: width 0.4s ease; }
-        .progress-text { font-size: 0.9rem; color: #7f8c8d; text-align: center; margin-bottom: 15px; font-weight: bold; }
-        .badge { display: inline-block; background-color: #f39c12; color: white; font-size: 0.8rem; padding: 4px 8px; border-radius: 4px; margin-bottom: 10px; }
-        .question-text { font-size: 1.2rem; line-height: 1.5; margin-bottom: 20px; font-weight: bold; color: var(--primary); }
-        .option-btn { display: block; width: 100%; margin: 10px 0; background-color: #fff; color: var(--text); border: 2px solid #ecf0f1; padding: 15px; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: all 0.2s; text-align: right; line-height: 1.5; }
-        .option-btn:hover:not(:disabled) { border-color: var(--secondary); background-color: #fef5ec; }
-        .correct { background-color: var(--success) !important; color: white !important; border-color: var(--success) !important; }
-        .wrong { background-color: var(--danger) !important; color: white !important; border-color: var(--danger) !important; }
-        #feedback { margin-top: 15px; padding: 12px; border-radius: 8px; display: none; font-size: 0.95rem; line-height: 1.4; font-weight: bold; }
-        .next-btn-container { text-align: center; margin-top: 20px; }
-        #next-btn { background-color: var(--primary); color: white; border: none; padding: 10px 25px; border-radius: 8px; font-size: 1rem; cursor: pointer; width: 100%; }
-        .year-footer { margin-top: 20px; font-size: 0.8rem; color: #95a5a6; text-align: left; border-top: 1px solid #eee; padding-top: 10px; }
-        .hidden { display: none !important; }
-        .result-container { text-align: center; }
-        .score-display { font-size: 2.5rem; color: var(--success); font-weight: bold; margin: 20px 0; }
-        .retry-btn { background-color: #c0392b; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 1rem; width: 100%; margin-top: 15px;}
-        .teacher-footer { text-align: center; color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; padding: 10px; max-width: 650px; width: 100%; border-top: 2px solid #ddd; margin-top: auto; }
-        .teacher-footer strong { color: var(--primary); }
     </style>
 </head>
 <body>
 
-<div class="container" id="login-screen">
-    <h2>تدريب باب أحكام النون والميم المشددتين والميم الساكنة</h2>
-    <div class="input-group">
-        <p>الرجاء إدخال اسمك للبدء في الاختبار (8 أسئلة):</p>
-        <input type="text" id="student-name" placeholder="الاسم الثلاثي">
+    <div class="controls no-print">
+        <h1>🖨️ منصة الطباعة الشاملة - دروس التجويد</h1>
+        
+        <div class="btn-group">
+            <h3>1. درس: أحكام التفخيم والتحذيرات الأدائية</h3>
+            <button class="btn" onclick="printSection('tafkheem-student')">طباعة نسخة الطالبات (فارغة)</button>
+            <button class="btn btn-teacher" onclick="printSection('tafkheem-teacher')">طباعة نسخة المعلمة (مجابة)</button>
+        </div>
+
+        <div class="btn-group">
+            <h3>2. درس: أحكام الإدغام</h3>
+            <button class="btn" onclick="printSection('idgham-student')">طباعة نسخة الطالبات (فارغة)</button>
+            <button class="btn btn-teacher" onclick="printSection('idgham-teacher')">طباعة نسخة المعلمة (مجابة)</button>
+        </div>
+
+        <div class="btn-group">
+            <h3>3. درس: باب الضاد والظاء</h3>
+            <button class="btn" onclick="printSection('dhad-student')">طباعة نسخة الطالبات (فارغة)</button>
+            <button class="btn btn-teacher" onclick="printSection('dhad-teacher')">طباعة نسخة المعلمة (مجابة)</button>
+        </div>
+
+        <div class="btn-group">
+            <h3>4. درس: باب أحكام النون الساكنة والتنوين</h3>
+            <button class="btn" onclick="printSection('noon-student')">طباعة نسخة الطالبات (فارغة)</button>
+            <button class="btn btn-teacher" onclick="printSection('noon-teacher')">طباعة نسخة المعلمة (مجابة)</button>
+        </div>
+
+        <div class="btn-group">
+            <h3>5. درس: باب أحكام النون والميم المشددتين والميم الساكنة</h3>
+            <button class="btn" onclick="printSection('meem-student')">طباعة نسخة الطالبات (فارغة)</button>
+            <button class="btn btn-teacher" onclick="printSection('meem-teacher')">طباعة نسخة المعلمة (مجابة)</button>
+        </div>
     </div>
-    <div style="text-align: center;">
-        <button class="start-btn" onclick="startQuiz()">ابدأ التدريب</button>
+
+    <!-- ==================== 1. قسم التفخيم ==================== -->
+    <div id="tafkheem-student" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>أوراق عمل أحكام التفخيم والتحذيرات - المستوى الخامس</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info">
+                <span>اسم الطالبة: .................................................</span>
+                <span>الدرجة: ........ / 30</span>
+            </div>
+            <ol class="question-list">
+                <li>استشهد من عبارة الناظم على تخصيص لام اسم (الله) المعظم بالتفخيم بعد فتح أو ضم؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استدل على حكم ترقيق اللام في اسم الجلالة (الله) أو في غير لفظ الجلالة؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>الناظم لم يذكر حكم ترقيق اللام في المقدمة، إحالة على أصلها، أو اكتفاء بمفهوم المخالفة. [  ] صح &nbsp;&nbsp; [  ] خطأ</li>
+                <li>اذكر الشاهد كاملاً مع المثال الذي يخص فيه الحروف المستعلية المطبقة بأنها أكثر تفخيماً؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>ائت بشاهد من الجزرية يخص فيه الحروف المستعلية فقط مع ذكر مثال على ذلك؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استدل على الحروف التي ترقق قولا واحدا بدون استثناء شيء منها؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>بين المراد من كلمة (واخصصا) من قول الناظم: (واخصصا لإطباق أقوى)؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استدل من عبارة الناظم على إبقاء صفة إطباق الطاء من كلمتي (أحطت) و (بسطت)؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استدل من قول الناظم على إبقاء صفة الاستعلاء وذهابها من كلمة (نخلقكم)؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>اذكر الشاهد من باب الاستعلاء والإطباق في نظم الجزرية على حكم الإدغام الناقص؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>اذكر الشاهد الذي يدل على الحرص على إسكان الحروف التي لا حركة لها؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>بين سبب تنبيه ابن الجزري على تبيين السكون في مثل اللام (جعلنا) والنون (أنعمت)؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استشهد من الجزرية على تبيين وتمييز صفة الانفتاح وتخليص الذال من (محذورا) والسين من (عسى)؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>بين سبب تبيين وتمييز صفة الانفتاح في عبارة الناظم (وخلص انفتاح محذورا عسى...)؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>اذكر سبب مراعاة صفة الشدة في حرفي الكاف والتاء؟ <span class="answer-blank">(........................................................................................)</span></li>
+            </ol>
+        </div>
     </div>
-</div>
 
-<div class="container hidden" id="quiz-screen">
-    <div class="progress-bar-container"><div id="progress-bar" class="progress-bar"></div></div>
-    <div class="progress-text" id="progress-text"></div>
-    
-    <div id="badge-container"><span class="badge">أسئلة معتمدة من الوزارة</span></div>
-    <div class="question-text" id="question-text"></div>
-    <div id="options-container"></div>
-    <div id="feedback"></div>
-    
-    <div class="next-btn-container">
-        <button id="next-btn" class="hidden" onclick="nextQuestion()">السؤال التالي</button>
+    <div id="tafkheem-teacher" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>نموذج إجابة: أحكام التفخيم والتحذيرات</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info" style="color: #27ae60;"><span>خاص بالمعلمة (مجاب)</span></div>
+            <ol class="question-list">
+                <li>استشهد من عبارة الناظم على تخصيص لام اسم (الله) المعظم بالتفخيم؟ <span class="answer-filled">(وَفَخِّمِ اللَّامَ مِنْ اسْمِ اللَّهِ ... عَنْ فَتْحٍ أَوْ ضَمٍّ كَعَبْدُ اللَّهِ)</span></li>
+                <li>استدل على حكم ترقيق اللام في اسم الجلالة (الله) أو في غيره؟ <span class="answer-filled">(وَفَخِّمِ اللَّامَ مِنْ اسْمِ اللَّهِ ... عَنْ فَتْحٍ أَوْ ضَمٍّ كَعَبْدُ اللَّهِ) ((والمفهوم مخالف للمنطوق))</span></li>
+                <li>الناظم لم يذكر حكم ترقيق اللام، إحالة على أصلها، أو اكتفاء بمفهوم المخالفة. <span class="answer-filled">[ صح ]</span></li>
+                <li>اذكر الشاهد الذي يخص فيه الحروف المستعلية المطبقة بأنها أكثر تفخيماً؟ <span class="answer-filled">(وَحَرْفُ الْاِسْتِعْلَاءِ فَخِّمْ وَاخْصُصَا ... الإِطْبَاقَ أَقْوَى نَحْوُ قَالَ وَالْعَصَا)</span></li>
+                <li>ائت بشاهد يخص الحروف المستعلية فقط مع ذكر مثال؟ <span class="answer-filled">(وَحَرْفُ الْإِسْتِعْلَاءِ فَخِّمْ ... نَحْوُ قَالَ)</span></li>
+                <li>استدل على الحروف التي ترقق قولا واحدا بدون استثناء؟ <span class="answer-filled">(وَرَقِّقَنْ مُسْتَفِلاً مِنْ أَحْرُفِ) أو (وَحَرْفُ الإِسْتِعْلَاءِ فَخِّمْ) ((والمفهوم مخالف للمنطوق))</span></li>
+                <li>بين المراد من كلمة (واخصصا) من قول الناظم: (واخصصا لإطباق أقوى)؟ <span class="answer-filled">أصلها واخصصن، والمعنى خصص حروف الإطباق بتفخيم أقوى.</span></li>
+                <li>استدل من عبارة الناظم على إبقاء صفة إطباق الطاء من (أحطت) و (بسطت)؟ <span class="answer-filled">(وَبَيِّنِ الْإِطْبَاقَ مِنْ أَحَطتُ مع بَسَطتَ)</span></li>
+                <li>استدل من قول الناظم على إبقاء صفة الاستعلاء وذهابها من كلمة (نخلقكم)؟ <span class="answer-filled">(وَالْخُلْفُ بِنَخْلُقُكُمْ وَقَعْ)</span></li>
+                <li>اذكر الشاهد على حكم الإدغام الناقص؟ <span class="answer-filled">الشاهد: (وَبَيِّنِ الْإِطْبَاقَ مِنْ أَحَطتُ مع بسطت ... وَالْخُلْفُ بِنَخْلُقَكُمْ وَقَع).</span></li>
+                <li>اذكر الشاهد الذي يدل على الحرص على إسكان الحروف التي لا حركة لها؟ <span class="answer-filled">(وَاحْرِصْ عَلَى السُّكُونِ فِي جَعَلْنَا ... أَنْعَمْتَ وَالْمَغْضُوبِ مَعْ ضَلَلْنَا)</span></li>
+                <li>بين سبب تنبيه ابن الجزري على تبيين السكون في مثل اللام (جعلنا) والنون (أنعمت)؟ <span class="answer-filled">أمر بالحرص على السكون لئلا تصير اللام مدغمة ولا متحركة فيتغير المعنى.</span></li>
+                <li>استشهد على تبيين الانفتاح وتخليص الذال من (محذورا) والسين من (عسى)؟ <span class="answer-filled">(وَخَلِّصِ انْفِتَاحَ مَحْذُورًا عَسَى ... خَوْفَ اشْتِبَاهِهِ بِمَحْظُوراً عَصَى)</span></li>
+                <li>بين سبب تبيين وتمييز صفة الانفتاح في عبارة (وخلص انفتاح...)؟ <span class="answer-filled">لأن الذال والظاء يتحدان مخرجاً وكذا السين والصاد، فيجب التمييز بالانفتاح لئلا تشتبه الكلمات.</span></li>
+                <li>اذكر سبب مراعاة صفة الشدة في حرفي الكاف والتاء؟ <span class="answer-filled">لأن الشدة تمنع جريان الصوت معهما، فاحذر أن تتبعهما ركاكة أو تصير رخوة.</span></li>
+            </ol>
+        </div>
     </div>
-    <div class="year-footer" id="year-footer"></div>
-</div>
 
-<div class="container hidden result-container" id="result-screen">
-    <h2 id="result-title">انتهى التدريب!</h2>
-    <p style="font-size: 1.2rem;" id="student-name-display"></p>
-    <div class="score-display"><span id="score"></span> / <span id="total-score"></span></div>
-    <p id="saving-msg" style="color: #7f8c8d;">جاري حفظ النتيجة في السجل...</p>
-    <button id="retry-btn" class="retry-btn hidden" onclick="retryWrongQuestions()">إعادة حل الأسئلة الخاطئة</button>
-</div>
+    <!-- ==================== 2. قسم الإدغام ==================== -->
+    <div id="idgham-student" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>أوراق عمل أحكام الإدغام - المستوى الخامس</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info">
+                <span>اسم الطالبة: .................................................</span>
+                <span>الدرجة: ........ / 14</span>
+            </div>
+            <ol class="question-list">
+                <li>استدل من قول الناظم على إدغام الحرفين المتماثلين؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استدل من قول الناظم على إدغام الحرفين المتجانسين؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استشهد من أبيات المقدمة الجزرية لما يمتنع من إدغام الحرفين المتماثلين؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>اذكر شاهداً على ما يمتنع فيه الإدغام من الحرفين المتجانسين من نظم الجزرية؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>بين معنى كلمة (وأبن) في عبارة الناظم: (أدغم كقل رب وبل لا وأبن)؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>ينقسم الإدغام عموماً من حيث النظر إلى سببه إلى: [ ] 3 أقسام &nbsp; [ ] 4 أقسام &nbsp; [ ] قسمين</li>
+                <li>استشهد من الجزرية على حكم (الحرفين المتماثلين)؟ <span class="answer-blank">(........................................................................................)</span></li>
+            </ol>
+        </div>
+    </div>
 
-<div class="teacher-footer">
-    إعداد وتصميم المعلمة الأولى: <strong>أميرة محمد السيد</strong> <br>
-    بمركز جويرية بنت الحارث | للاستفسار: 36837886
-</div>
+    <div id="idgham-teacher" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>نموذج إجابة: أحكام الإدغام</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info" style="color: #27ae60;"><span>خاص بالمعلمة (مجاب)</span></div>
+            <ol class="question-list">
+                <li>استدل من قول الناظم على إدغام الحرفين المتماثلين؟ <span class="answer-filled">(وَأَوَّلَى مِثْلٍ إِنْ سَكَن ... أَدْغِمْ وَبَلْ لَّا)</span></li>
+                <li>استدل من قول الناظم على إدغام الحرفين المتجانسين؟ <span class="answer-filled">(وَأَوَّلَيْ وَجِنْسٍ إِنْ سَكَنْ ... أَدْغِمْ)</span></li>
+                <li>استشهد من أبيات المقدمة الجزرية لما يمتنع من إدغام الحرفين المتماثلين؟ <span class="answer-filled">(وَأَوَّلَى مِثْلٍ إِنْ سَكَن ... وَأَبِنْ فِي يَوْمِ مَعْ قَالُوا وَهُم)</span></li>
+                <li>اذكر شاهداً على ما يمتنع فيه الإدغام من الحرفين المتجانسين؟ <span class="answer-filled">(وَأَوَّلَيْ وَجِنْسٍ إِنْ سَكَنْ ... وَأَبِنْ ... وَقُلْ نَعَمْ)</span></li>
+                <li>بين معنى كلمة (وأبن) في عبارة الناظم: (أدغم كقل رب وبل لا وأبن)؟ <span class="answer-filled">أمر من الإبانة أي أظهر ولا تدغم.</span></li>
+                <li>ينقسم الإدغام عموماً من حيث النظر إلى سببه إلى: <span class="answer-filled">[ 3 أقسام ]</span></li>
+                <li>استشهد من الجزرية على حكم (الحرفين المتماثلين)؟ <span class="answer-filled">(وَأَوَّلَى مِثْلٍ إِنْ سَكَن ... أَدْغِمْ وَبَلْ لَّا)</span></li>
+            </ol>
+        </div>
+    </div>
 
-<script>
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwStG344rSY9oWOMDAXb2xOavyJpb__dOnohWSVF3gz60-xtYmnm34YKlm40J5sgsrv/exec";
+    <!-- ==================== 3. قسم الضاد والظاء ==================== -->
+    <div id="dhad-student" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>أوراق عمل باب الضاد والظاء - المستوى الخامس</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info">
+                <span>اسم الطالبة: .................................................</span>
+                <span>الدرجة: ........ / 30</span>
+            </div>
+            <ol class="question-list">
+                <li>عدد المواضع التي أتى بها الإمام الجزري لكلمة (ظل) بمعنى يفيد الاستمرار هي: <span class="answer-blank">(...................................................................)</span></li>
+                <li>جملة ما ورد في القرآن الكريم من الظاءات المتفق عليها: <span class="answer-blank">(...................................................................)</span></li>
+                <li>عدد الكلمات المستثناة من كلمة (والغيظ) بمعنى الغضب: <span class="answer-blank">(...................................................................)</span></li>
+                <li>جملة ما ورد في القرآن الكريم من ألفاظ للظاءات المختلف عليها بين القراء: <span class="answer-blank">(...................................................................)</span></li>
+                <li>الخلاف في كلمة (بضنين) في القراءة لا في الرسم، فهى مرسومة بالظاء. [  ] صح &nbsp;&nbsp; [  ] خطأ</li>
+                <li>عدد مواضع كلمة (فَظًّا) في القرآن الكريم التي ذكرها الإمام الجزري موضع واحد. [  ] صح &nbsp;&nbsp; [  ] خطأ</li>
+                <li>المراد من قول الناظم (وجميع النظر) من الإنظار بمعنى التأخير والمهلة. [  ] صح &nbsp;&nbsp; [  ] خطأ</li>
+                <li>استدل على ما يميز ويفرق بين حرفي الضاد والظاء من قول الناظم في الجزرية؟ <span class="answer-blank">(...................................................................)</span></li>
+                <li>اذكر الكلمات التي ذكرها الناظم فيما يجب فيه بيان الضاد والظاء وتخليصهما؟ <span class="answer-blank">(...................................................................)</span></li>
+                <li>الشاهد من الجزرية على كلمة (ظَلَّ) التي بمعنى "دام أو صار" في سورتي (النحل والزخرف): <span class="answer-blank">(...................................................................)</span></li>
+                <li>الشاهد من الجزرية على كلمة (ظلوا) التي بمعنى "دام وصار"، هو قول الناظم: <span class="answer-blank">(...................................................................)</span></li>
+                <li>اذكر الشاهد من الجزرية لسورة القيامة المستثناة من النظر بالظاء؟ <span class="answer-blank">(...................................................................)</span></li>
+                <li>ما المقصود من عبارة الناظم: (والغيظ لا الرعد وهود قاصرة)؟ <span class="answer-blank">(...................................................................)</span></li>
+                <li>اشرح قول الناظم (وعظ سوى عضين)؟ <span class="answer-blank">(...................................................................)</span></li>
+                <li>بين معنى قول الناظم: (ظنا كيف جا)؟ <span class="answer-blank">(...................................................................)</span></li>
+            </ol>
+        </div>
+    </div>
 
-    const allQuestions = [
-        { 
-            q: "مراتب الغنة في النون والميم هي:", 
-            options: [
-                "أربع مراتب", 
-                "ثلاث مراتب", 
-                "خمس مراتب",
-                "مرتبتان"
-            ], 
-            ans: 0, 
-            exp: "الغنة صفة لازمة للنون والميم، إلا أنها في الساكن أكمل من المتحرك، وفي المخفي أزيد من المظهر، وفي المدغم أوفى من المخفي.", 
-            year: "يونيو 2024 / فبراير 2025 / فبراير 2026" 
-        },
-        { 
-            q: "معنى قول الناظم: (وأظهر الغنة من نون ومن ... ميم إذا ما شددا) أي: بين وبالغ في إظهار الغنة الصادرة من نون وميم مشددتين؛ لأنها تكون في أوفى وأكمل مراتبها.", 
-            options: [
-                "صح", 
-                "خطأ"
-            ], 
-            ans: 0, 
-            exp: "أمر الناظم بالمبالغة في إظهار الغنة في النون والميم المشددتين نحو (إنّ) و(ثمّ) لكونها في أكمل مراتبها.", 
-            year: "أبريل 2025 / مايو 2026" 
-        },
-        { 
-            q: "استشهد من المقدمة الجزرية على حكم النون والميم المشددتين؟", 
-            options: [
-                "(وَأَظْهِرِ الْغُنَّةَ مِنْ نُونٍ وَمِنْ ... مِيمٍ إِذَا مَا شُدِّدَا ...)", 
-                "(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)", 
-                "(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)"
-            ], 
-            ans: 0, 
-            exp: "يجب إظهار الغنة وبيانها في النون والميم إذا كانتا مشددتين سواء في كلمة أو كلمتين.", 
-            year: "بنك الأسئلة الوزارية المعتمدة" 
-        },
-        { 
-            q: "استشهد من المقدمة الجزرية على إدغام الميم الساكنة؟", 
-            options: [
-                "(وَأَظْهِرِ الْغُنَّةَ مِنْ ... مِيمٍ إِذَا مَا شُدِّدَا ...)", 
-                "(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)", 
-                "(وَحُكْمُ تَنْوِينٍ وَنُونٍ يُلْفَى ... إِظْهَارٌ ادْغَامٌ وَقَلْبٌ اخْفَا)"
-            ], 
-            ans: 0, 
-            exp: "التشديد في الميم يشمل المدغمة في مثلها في كلمة أو كلمتين نحو (مَا لَهُم مِّنَ اللَّهِ) فتظهر فيها الغنة.", 
-            year: "بنك الأسئلة الوزارية المعتمدة" 
-        },
-        { 
-            q: "استشهد من كلام المصنف على القول الصحيح المختار من أقوال أهل الأداء لإخفاء الميم الساكنة لدى الباء؟", 
-            options: [
-                "(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)", 
-                "(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)", 
-                "(وَالْقَلْبُ عِنْدَ الْبَا بِغُنَّةٍ كَذَا ... الإِخْفَا لَدَى بَاقِي الْحُرُوفِ أُخِذَا)"
-            ], 
-            ans: 0, 
-            exp: "تُخفى الميم الساكنة بغنة إذا وقع بعدها حرف الباء نحو (يَعْتَصِم بِاللَّهِ) على القول المختار عند الجمهور.", 
-            year: "أبريل 2024 / أكتوبر 2025" 
-        },
-        { 
-            q: "بين القول المختار من أقوال أهل الأداء من عبارة الناظم: (على المختار من أهل الأدا)؟", 
-            options: [
-                "القول المختار هو إخفاء الميم الساكنة عند الباء.", 
-                "القول المختار هو إظهار الميم الساكنة عند الباء بلا غنة.", 
-                "القول المختار هو إدغام الميم الساكنة في الباء إدغاماً كاملاً."
-            ], 
-            ans: 0, 
-            exp: "مذهب الجمهور وابن مجاهد والداني وما اختاره ابن الجزري هو إخفاء الميم الساكنة مع الغنة عند الباء.", 
-            year: "فبراير 2026" 
-        },
-        { 
-            q: "استشهد من المقدمة الجزرية على إظهار الميم الساكنة عند حروف الهجاء؟", 
-            options: [
-                "(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)", 
-                "(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)", 
-                "(وَأَظْهِرِ الْغُنَّةَ مِنْ نُونٍ وَمِنْ ... مِيمٍ إِذَا مَا شُدِّدَا)"
-            ], 
-            ans: 0, 
-            exp: "تُظهر الميم الساكنة عند باقي حروف الهجاء (غير الميم والباء) سواء في كلمة نحو (أَنْعَمْتَ) أو كلمتين.", 
-            year: "فبراير 2025 / أغسطس 2025 / فبراير 2026" 
-        },
-        { 
-            q: "استشهد من قول الناظم على التحذير من إخفاء الميم الساكنة خاصة عند حرفي الواو والفاء؛ لاتحاد مخرجها بالواو وقربها من الفاء؟", 
-            options: [
-                "(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)", 
-                "(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)", 
-                "(وَاحْرِصْ عَلَى السُّكُونِ فِي جَعَلْنَا ... أَنْعَمْتَ وَالْمَغْضُوبِ مَعْ ضَلَلْنَا)"
-            ], 
-            ans: 0, 
-            exp: "حذّر الناظم من اختفاء الميم الساكنة عند الواو والفاء لاتحاد مخرجها بالواو وقربها من الفاء فيسبق اللسان إلى الإخفاء.", 
-            year: "فبراير 2024 / يونيو 2025 / مايو 2026" 
+    <div id="dhad-teacher" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>نموذج إجابة: باب الضاد والظاء</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info" style="color: #27ae60;"><span>خاص بالمعلمة (مجاب)</span></div>
+            <ol class="question-list">
+                <li>عدد المواضع التي أتى بها الإمام الجزري لكلمة (ظل) بمعنى يفيد الاستمرار هي: <span class="answer-filled">9 مواضع</span></li>
+                <li>جملة ما ورد في القرآن الكريم من الظاءات المتفق عليها: <span class="answer-filled">30 لفظا</span></li>
+                <li>عدد الكلمات المستثناة من كلمة (والغيظ) بمعنى الغضب: <span class="answer-filled">كلمتان (الرعد وهود)</span></li>
+                <li>جملة ما ورد في القرآن الكريم من ألفاظ للظاءات المختلف عليها بين القراء: <span class="answer-filled">لفظ واحد (وهو: بضنين)</span></li>
+                <li>الخلاف في كلمة (بضنين) في القراءة لا في الرسم، فهى مرسومة بالظاء. <span class="answer-filled">[ خطأ (مرسومة بالضاد) ]</span></li>
+                <li>عدد مواضع كلمة (فَظًّا) في القرآن الكريم التي ذكرها الإمام الجزري موضع واحد. <span class="answer-filled">[ صح ]</span></li>
+                <li>المراد من قول الناظم (وجميع النظر) من الإنظار بمعنى التأخير والمهلة. <span class="answer-filled">[ خطأ (بمعنى الرؤية أو التفكير) ]</span></li>
+                <li>استدل على ما يميز ويفرق بين حرفي الضاد والظاء من قول الناظم؟ <span class="answer-filled">(وَالصَّادَ بِاسْتِطَالَةٍ وَمَخْرَجِ ... مَيِّزْ مِنَ الظَّاءِ وَكُلُّهَا تَجِي)</span></li>
+                <li>اذكر الكلمات التي ذكرها الناظم فيما يجب فيه بيان الضاد والظاء وتخليصهما؟ <span class="answer-filled">(أَنقَضَ ظَهْرَكَ)، (يَعَضُّ الظَّالِمُ)، (اضْطُرَّ)، (وَعَظْتَ)، (أَفَضْتُمْ)</span></li>
+                <li>الشاهد من الجزرية على كلمة (ظَلَّ) التي بمعنى "دام أو صار": <span class="answer-filled">(ظَلَّ النَّحْلِ زُخْرُفٍ سَوَا)</span></li>
+                <li>الشاهد من الجزرية على كلمة (ظلوا) التي بمعنى "دام وصار": <span class="answer-filled">(وَبِرُومٍ ظَلُّوا كَالْحِجْرِ)</span></li>
+                <li>اذكر الشاهد من الجزرية لسورة القيامة المستثناة من النظر بالظاء؟ <span class="answer-filled">(وَجَمِيعِ النَّظَرِ إِلَّا وَأُولَى نَاضِرَهُ)</span></li>
+                <li>ما المقصود من عبارة الناظم: (والغيظ لا الرعد وهود قاصرة)؟ <span class="answer-filled">استثناء موضعين بكلمة (الغيظ) بمعنى النقصان رُسما بالضاد في (تغيض، وغيض).</span></li>
+                <li>اشرح قول الناظم (وعظ سوى عضين)؟ <span class="answer-filled">كلمة وعظ (التخويف) بالظاء، واستثنى لفظ (عِضِينَ) فتقرأ بالضاد ومعناها فرقاً.</span></li>
+                <li>بين معنى قول الناظم: (ظنا كيف جا)؟ <span class="answer-filled">أي باب الظن كيف ورد في القرآن سواء بمعنى الشك أو اليقين يكتب بالظاء.</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ==================== 4. قسم النون الساكنة والتنوين ==================== -->
+    <div id="noon-student" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>أوراق عمل باب أحكام النون الساكنة والتنوين - المستوى الخامس</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info">
+                <span>اسم الطالبة: .................................................</span>
+                <span>الدرجة: ........ / 8</span>
+            </div>
+            <ol class="question-list">
+                <li>المراد من قول ابن الجزري (والقلب عند البا بغنة) هو: <br>
+                    [ ] تحويل التنوين إلى نون ساكنة &nbsp;&nbsp; [ ] تحويل النون الساكنة والتنوين إلى ميم &nbsp;&nbsp; [ ] تحويل الباء إلى ميم ساكنة
+                </li>
+                <li>يترتب على وقوع النون الساكنة أو نون التنوين قبل حرف الباء قلب النون إلى .................... ويكون حكمها حينئذ ....................</li>
+                <li>استشهد من المقدمة الجزرية على أحكام النون الساكنة والتنوين؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استشهد من أبيات الجزرية على الإدغام بغنة في حروف (يومن)؟ <span class="answer-blank">(........................................................................................)</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div id="noon-teacher" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>نموذج إجابة: باب أحكام النون الساكنة والتنوين</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info" style="color: #27ae60;"><span>خاص بالمعلمة (مجاب)</span></div>
+            <ol class="question-list">
+                <li>المراد من قول ابن الجزري (والقلب عند البا بغنة) هو: <span class="answer-filled">[ تحويل النون الساكنة والتنوين إلى ميم ]</span></li>
+                <li>يترتب على وقوع النون الساكنة أو نون التنوين قبل حرف الباء: <span class="answer-filled">قلب النون إلى (ميم) ويكون حكمها حينئذ (الإخفاء).</span></li>
+                <li>استشهد من المقدمة الجزرية على أحكام النون الساكنة والتنوين؟ <span class="answer-filled">(وَحُكْمُ تَنْوِينٍ وَنُونٍ يُلْفَى ... إِظْهَارٌ ادْغَامٌ وَقَلْبٌ اخْفَا)</span></li>
+                <li>استشهد من أبيات الجزرية على الإدغام بغنة في حروف (يومن)؟ <span class="answer-filled">(وَأَدْغِمَنْ بِغُنَّةٍ فِي يُومِنُ ... إِلَّا بِكِلْمَةٍ كَدُنْيَا عَنْوَنُوا)</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ==================== 5. قسم النون والميم المشددتين والميم الساكنة ==================== -->
+    <div id="meem-student" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>أوراق عمل باب النون والميم المشددتين والميم الساكنة - المستوى الخامس</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info">
+                <span>اسم الطالبة: .................................................</span>
+                <span>الدرجة: ........ / 16</span>
+            </div>
+            <ol class="question-list">
+                <li>مراتب الغنة في النون والميم هي: <br>
+                    [ ] مرتبتان &nbsp;&nbsp; [ ] ثلاث مراتب &nbsp;&nbsp; [ ] أربع مراتب &nbsp;&nbsp; [ ] خمس مراتب
+                </li>
+                <li>معنى قول الناظم: (وأظهر الغنة من نون ومن ... ميم إذا ما شددا) أي: بين وبالغ في إظهار الغنة الصادرة من نون وميم مشددتين؛ لأنها تكون في أوفى وأكمل مراتبها. [  ] صح &nbsp;&nbsp; [  ] خطأ</li>
+                <li>استشهد من المقدمة الجزرية على حكم النون والميم المشددتين؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استشهد من المقدمة الجزرية على إدغام الميم الساكنة؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استشهد من كلام المصنف على القول الصحيح المختار من أقوال أهل الأداء لإخفاء الميم الساكنة لدى الباء؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>بين القول المختار من أقوال أهل الأداء من عبارة الناظم: (على المختار من أهل الأدا)؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استشهد من المقدمة الجزرية على إظهار الميم الساكنة عند حروف الهجاء؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استشهد من قول الناظم على التحذير من إخفاء الميم الساكنة خاصة عند حرفي الواو والفاء؛ لاتحاد مخرجها بالواو وقربها من الفاء؟ <span class="answer-blank">(........................................................................................)</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div id="meem-teacher" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>نموذج إجابة: باب النون والميم المشددتين والميم الساكنة</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info" style="color: #27ae60;"><span>خاص بالمعلمة (مجاب)</span></div>
+            <ol class="question-list">
+                <li>مراتب الغنة في النون والميم هي: <span class="answer-filled">[ أربع مراتب ]</span></li>
+                <li>معنى قول الناظم: (وأظهر الغنة من نون ومن ... ميم إذا ما شددا) أي: بين وبالغ في إظهار الغنة الصادرة من نون وميم مشددتين؛ لأنها تكون في أوفى وأكمل مراتبها. <span class="answer-filled">[ صح ]</span></li>
+                <li>استشهد من المقدمة الجزرية على حكم النون والميم المشددتين؟ <span class="answer-filled">(وَأَظْهِرِ الْغُنَّةَ مِنْ نُونٍ وَمِنْ ... مِيمٍ إِذَا مَا شُدِّدَا ...)</span></li>
+                <li>استشهد من المقدمة الجزرية على إدغام الميم الساكنة؟ <span class="answer-filled">(وَأَظْهِرِ الْغُنَّةَ مِنْ ... مِيمٍ إِذَا مَا شُدِّدَا ...)</span></li>
+                <li>استشهد من كلام المصنف على القول الصحيح المختار من أقوال أهل الأداء لإخفاء الميم الساكنة لدى الباء؟ <span class="answer-filled">(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)</span></li>
+                <li>بين القول المختار من أقوال أهل الأداء من عبارة الناظم: (على المختار من أهل الأدا)؟ <span class="answer-filled">القول المختار هو إخفاء الميم الساكنة عند الباء.</span></li>
+                <li>استشهد من المقدمة الجزرية على إظهار الميم الساكنة عند حروف الهجاء؟ <span class="answer-filled">(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)</span></li>
+                <li>استشهد من قول الناظم على التحذير من إخفاء الميم الساكنة خاصة عند حرفي الواو والفاء؟ <span class="answer-filled">(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function printSection(sectionId) {
+            var sections = document.getElementsByClassName('lesson-content');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = 'none';
+            }
+            document.getElementById(sectionId).style.display = 'block';
+            window.print();
+            setTimeout(function() {
+                document.getElementById(sectionId).style.display = 'none';
+            }, 1000);
         }
-    ];
-
-    let studentName = "";
-    let score = 0;
-    let currentQuestionIndex = 0;
-    let activeQuestions = [];
-    let wrongQuestionsLog = []; 
-    let wrongQuestionsObjects = []; 
-    let isRetryMode = false;
-
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-
-    function startQuiz() {
-        const nameInput = document.getElementById("student-name").value.trim();
-        if (nameInput === "") { alert("يرجى إدخال اسمك للمتابعة."); return; }
-        
-        studentName = nameInput; 
-        activeQuestions = shuffleArray([...allQuestions]);
-        
-        document.getElementById("login-screen").classList.add("hidden");
-        document.getElementById("quiz-screen").classList.remove("hidden");
-        
-        score = 0; wrongQuestionsLog = []; wrongQuestionsObjects = []; currentQuestionIndex = 0;
-        loadQuestion();
-    }
-
-    function updateProgressBar() {
-        const progressPercentage = (currentQuestionIndex / activeQuestions.length) * 100;
-        document.getElementById("progress-bar").style.width = progressPercentage + "%";
-        document.getElementById("progress-text").innerText = `السؤال ${currentQuestionIndex + 1} من ${activeQuestions.length}`;
-    }
-
-    function loadQuestion() {
-        document.getElementById("feedback").style.display = "none";
-        document.getElementById("next-btn").classList.add("hidden");
-        updateProgressBar();
-        const q = activeQuestions[currentQuestionIndex];
-        
-        document.getElementById("question-text").innerText = q.q;
-        document.getElementById("year-footer").innerText = `المصدر: اختبارات (${q.year})`;
-        
-        const optionsContainer = document.getElementById("options-container");
-        optionsContainer.innerHTML = "";
-        
-        let shuffledOptions = q.options.map((opt, index) => ({ text: opt, originalIndex: index }));
-        shuffledOptions = shuffleArray(shuffledOptions);
-        
-        shuffledOptions.forEach((optObj) => {
-            const btn = document.createElement("button");
-            btn.innerText = optObj.text;
-            btn.className = "option-btn";
-            btn.onclick = () => checkAnswer(optObj.originalIndex, btn);
-            optionsContainer.appendChild(btn);
-        });
-    }
-
-    function checkAnswer(selectedOriginalIndex, btnElement) {
-        const buttons = document.querySelectorAll(".option-btn");
-        buttons.forEach(b => b.disabled = true);
-        const q = activeQuestions[currentQuestionIndex];
-        const feedbackDiv = document.getElementById("feedback");
-        feedbackDiv.style.display = "block";
-
-        if (selectedOriginalIndex === q.ans) {
-            btnElement.classList.add("correct");
-            feedbackDiv.style.backgroundColor = "#e8f5e9";
-            feedbackDiv.style.color = "#2e7d32";
-            feedbackDiv.innerText = "إجابة صحيحة ✔️\nالتعليل: " + q.exp;
-            if (!isRetryMode) score += 2; 
-        } else {
-            btnElement.classList.add("wrong");
-            buttons.forEach(b => { if (b.innerText === q.options[q.ans]) b.classList.add("correct"); });
-            feedbackDiv.style.backgroundColor = "#ffebee";
-            feedbackDiv.style.color = "#c62828";
-            feedbackDiv.innerText = "إجابة خاطئة ❌\nالصواب: " + q.options[q.ans];
-            if (!isRetryMode) { wrongQuestionsLog.push(q.q); wrongQuestionsObjects.push(q); }
-        }
-        document.getElementById("next-btn").classList.remove("hidden");
-    }
-
-    function nextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < activeQuestions.length) loadQuestion();
-        else endQuiz();
-    }
-
-    function endQuiz() {
-        document.getElementById("quiz-screen").classList.add("hidden");
-        document.getElementById("result-screen").classList.remove("hidden");
-        document.getElementById("progress-bar").style.width = "100%";
-        
-        document.getElementById("student-name-display").innerText = "الطالبة: " + studentName;
-        document.getElementById("score").innerText = score;
-        const totalPossible = isRetryMode ? score : (activeQuestions.length * 2); 
-        document.getElementById("total-score").innerText = activeQuestions.length * 2;
-
-        const retryBtn = document.getElementById("retry-btn");
-        if (wrongQuestionsObjects.length > 0 && !isRetryMode) {
-            document.getElementById("result-title").innerText = "يوجد أخطاء تحتاج للتصحيح!";
-            retryBtn.classList.remove("hidden");
-        } else {
-            document.getElementById("result-title").innerText = "عمل رائع! التدريب مكتمل بنجاح.";
-            retryBtn.classList.add("hidden");
-        }
-
-        if (!isRetryMode) sendDataToSheet(totalPossible);
-        else document.getElementById("saving-msg").classList.add("hidden");
-    }
-
-    function retryWrongQuestions() {
-        isRetryMode = true;
-        activeQuestions = shuffleArray([...wrongQuestionsObjects]);
-        wrongQuestionsObjects = [];
-        currentQuestionIndex = 0;
-        document.getElementById("result-screen").classList.add("hidden");
-        document.getElementById("quiz-screen").classList.remove("hidden");
-        loadQuestion();
-    }
-
-    function sendDataToSheet(totalPossible) {
-        const payload = { name: studentName + " (النون والميم المشددتين والميم الساكنة)", score: score, total: totalPossible, wrongQuestions: wrongQuestionsLog };
-        fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-        .then(() => {
-            document.getElementById("saving-msg").innerText = "تم حفظ النتيجة بنجاح في سجل المعلمة ✔️";
-            document.getElementById("saving-msg").style.color = "#27ae60";
-        }).catch(err => {
-            document.getElementById("saving-msg").innerText = "حدث خطأ أثناء حفظ النتيجة.";
-            document.getElementById("saving-msg").style.color = "#e74c3c";
-        });
-    }
-</script>
+    </script>
 </body>
 </html>
