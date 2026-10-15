@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تدريب أحكام النون الساكنة والتنوين</title>
+    <style>
+        :root {
+            --primary: #1e3799; /* لون كحلي ملكي مميز لدرس النون الساكنة */
+            --secondary: #4a69bd;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --bg: #f5f7fa;
+            --text: #333;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: white; padding: 25px 20px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); width: 100%; max-width: 650px; box-sizing: border-box; position: relative; margin-bottom: 20px; }
+        h2 { text-align: center; color: var(--primary); margin-top: 0; font-size: 1.5rem; }
+        .input-group { margin: 20px 0; text-align: center; }
+        input[type="text"] { width: 90%; padding: 12px; border: 2px solid #bdc3c7; border-radius: 8px; font-size: 16px; text-align: center; outline: none; margin-bottom: 15px; font-family: inherit; }
+        input[type="text"]:focus { border-color: var(--secondary); }
+        button.start-btn { background-color: var(--secondary); color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-size: 16px; width: 90%; font-weight: bold; }
+        .progress-bar-container { width: 100%; background-color: #e0e0e0; border-radius: 8px; margin-bottom: 10px; height: 12px; overflow: hidden; }
+        .progress-bar { height: 100%; background-color: var(--success); width: 0%; transition: width 0.4s ease; }
+        .progress-text { font-size: 0.9rem; color: #7f8c8d; text-align: center; margin-bottom: 15px; font-weight: bold; }
+        .badge { display: inline-block; background-color: #f39c12; color: white; font-size: 0.8rem; padding: 4px 8px; border-radius: 4px; margin-bottom: 10px; }
+        .question-text { font-size: 1.2rem; line-height: 1.5; margin-bottom: 20px; font-weight: bold; color: var(--primary); }
+        .option-btn { display: block; width: 100%; margin: 10px 0; background-color: #fff; color: var(--text); border: 2px solid #ecf0f1; padding: 15px; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: all 0.2s; text-align: right; line-height: 1.5; }
+        .option-btn:hover:not(:disabled) { border-color: var(--secondary); background-color: #eef2fb; }
+        .correct { background-color: var(--success) !important; color: white !important; border-color: var(--success) !important; }
+        .wrong { background-color: var(--danger) !important; color: white !important; border-color: var(--danger) !important; }
+        #feedback { margin-top: 15px; padding: 12px; border-radius: 8px; display: none; font-size: 0.95rem; line-height: 1.4; font-weight: bold; }
+        .next-btn-container { text-align: center; margin-top: 20px; }
+        #next-btn { background-color: var(--primary); color: white; border: none; padding: 10px 25px; border-radius: 8px; font-size: 1rem; cursor: pointer; width: 100%; }
+        .year-footer { margin-top: 20px; font-size: 0.8rem; color: #95a5a6; text-align: left; border-top: 1px solid #eee; padding-top: 10px; }
+        .hidden { display: none !important; }
+        .result-container { text-align: center; }
+        .score-display { font-size: 2.5rem; color: var(--success); font-weight: bold; margin: 20px 0; }
+        .retry-btn { background-color: #e67e22; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 1rem; width: 100%; margin-top: 15px;}
+        .teacher-footer { text-align: center; color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; padding: 10px; max-width: 650px; width: 100%; border-top: 2px solid #ddd; margin-top: auto; }
+        .teacher-footer strong { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+<div class="container" id="login-screen">
+    <h2>تدريب أحكام النون الساكنة والتنوين</h2>
+    <div class="input-group">
+        <p>الرجاء إدخال اسمك للبدء في الاختبار (4 أسئلة):</p>
+        <input type="text" id="student-name" placeholder="الاسم الثلاثي">
+    </div>
+    <div style="text-align: center;">
+        <button class="start-btn" onclick="startQuiz()">ابدأ التدريب</button>
+    </div>
+</div>
+
+<div class="container hidden" id="quiz-screen">
+    <div class="progress-bar-container"><div id="progress-bar" class="progress-bar"></div></div>
+    <div class="progress-text" id="progress-text"></div>
+    
+    <div id="badge-container"><span class="badge">أسئلة معتمدة من الوزارة</span></div>
+    <div class="question-text" id="question-text"></div>
+    <div id="options-container"></div>
+    <div id="feedback"></div>
+    
+    <div class="next-btn-container">
+        <button id="next-btn" class="hidden" onclick="nextQuestion()">السؤال التالي</button>
+    </div>
+    <div class="year-footer" id="year-footer"></div>
+</div>
+
+<div class="container hidden result-container" id="result-screen">
+    <h2 id="result-title">انتهى التدريب!</h2>
+    <p style="font-size: 1.2rem;" id="student-name-display"></p>
+    <div class="score-display"><span id="score"></span> / <span id="total-score"></span></div>
+    <p id="saving-msg" style="color: #7f8c8d;">جاري حفظ النتيجة في السجل...</p>
+    <button id="retry-btn" class="retry-btn hidden" onclick="retryWrongQuestions()">إعادة حل الأسئلة الخاطئة</button>
+</div>
+
+<div class="teacher-footer">
+    إعداد وتصميم المعلمة الأولى: <strong>أميرة محمد السيد</strong> <br>
+    بمركز جويرية بنت الحارث | للاستفسار: 36837886
+</div>
+
+<script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwStG344rSY9oWOMDAXb2xOavyJpb__dOnohWSVF3gz60-xtYmnm34YKlm40J5sgsrv/exec";
+
+    const allQuestions = [
+        { 
+            q: "المراد من قول ابن الجزري (والقلب عند البا بغنة) هو:", 
+            options: [
+                "تحويل النون الساكنة والتنوين إلى ميم", 
+                "تحويل التنوين إلى نون ساكنة", 
+                "تحويل الباء إلى ميم ساكنة",
+                "تحويل النون الساكنة والتنوين إلى الباء"
+            ], 
+            ans: 0, 
+            exp: "القلب اصطلاحاً هو قلب النون الساكنة أو التنوين ميماً عند الباء مع مراعاة الغنة والإخفاء.", 
+            year: "يونيو 2024 / أبريل 2025 / يونيو 2025" 
+        },
+        { 
+            q: "يترتب على وقوع النون الساكنة أو نون التنوين قبل حرف الباء:", 
+            options: [
+                "قلب النون إلى ميم، ويكون حكمها حينئذ الإخفاء.", 
+                "قلب النون إلى ميم، ويكون حكمها حينئذ الإدغام.", 
+                "إخفاء النون الساكنة مباشرة دون قلب.",
+                "قلب الباء إلى ميم، ويكون حكمها الإظهار."
+            ], 
+            ans: 0, 
+            exp: "لا يتحقق القلب إلا بثلاثة أعمال: قلب النون أو التنوين ميماً خالصة، وإخفاء هذه الميم عند الباء، وإظهار الغنة.", 
+            year: "فبراير 2024 / فبراير 2025 / فبراير 2026" 
+        },
+        { 
+            q: "استشهد من المقدمة الجزرية على أحكام النون الساكنة والتنوين؟", 
+            options: [
+                "(وَحُكْمُ تَنْوِينٍ وَنُونٍ يُلْفَى ... إِظْهَارٌ ادْغَامٌ وَقَلْبٌ اخْفَا)", 
+                "(فَعِنْدَ حَرْفِ الْحَلْقِ أَظْهِرْ وَادَّغِمْ ... فِي اللَّامِ وَالرَّا لَا بِغُنَّةٍ لَزِمْ)", 
+                "(وَالْقَلْبُ عِنْدَ الْبَا بِغُنَّةٍ كَذَا ... الإِخْفَا لَدَى بَاقِي الْحُرُوفِ أُخِذَا)"
+            ], 
+            ans: 0, 
+            exp: "أخبر الناظم في هذا البيت بإجمال أحكام النون الساكنة والتنوين الأربعة عند حروف الهجاء.", 
+            year: "أبريل 2025 / مايو 2026" 
+        },
+        { 
+            q: "استشهد من أبيات الجزرية على الإدغام بغنة في حروف (يومن)؟", 
+            options: [
+                "(وَأَدْغِمَنْ بِغُنَّةٍ فِي يُومِنُ ... إِلَّا بِكِلْمَةٍ كَدُنْيَا عَنْوَنُوا)", 
+                "(فَعِنْدَ حَرْفِ الْحَلْقِ أَظْهِرْ وَادَّغِمْ ... فِي اللَّامِ وَالرَّا لَا بِغُنَّةٍ لَزِمْ)", 
+                "(وَأَوَّلَيْ مِثْلٍ وَجِنْسٍ إِنْ سَكَنْ ... أَدْغِمْ كَقُل رَّبِّ وَبَلْ لَّا وَأَبِنْ)"
+            ], 
+            ans: 0, 
+            exp: "تُدغم النون الساكنة والتنوين بغنة في أحرف (يومن) بشرط أن يكون من كلمتين، فإن كان في كلمة واحدة وجب الإظهار.", 
+            year: "فبراير 2025 / ديسمبر 2025" 
+        }
+    ];
+
+    let studentName = "";
+    let score = 0;
+    let currentQuestionIndex = 0;
+    let activeQuestions = [];
+    let wrongQuestionsLog = []; 
+    let wrongQuestionsObjects = []; 
+    let isRetryMode = false;
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function startQuiz() {
+        const nameInput = document.getElementById("student-name").value.trim();
+        if (nameInput === "") { alert("يرجى إدخال اسمك للمتابعة."); return; }
+        
+        studentName = nameInput; 
+        activeQuestions = shuffleArray([...allQuestions]);
+        
+        document.getElementById("login-screen").classList.add("hidden");
+        document.getElementById("quiz-screen").classList.remove("hidden");
+        
+        score = 0; wrongQuestionsLog = []; wrongQuestionsObjects = []; currentQuestionIndex = 0;
+        loadQuestion();
+    }
+
+    function updateProgressBar() {
+        const progressPercentage = (currentQuestionIndex / activeQuestions.length) * 100;
+        document.getElementById("progress-bar").style.width = progressPercentage + "%";
+        document.getElementById("progress-text").innerText = `السؤال ${currentQuestionIndex + 1} من ${activeQuestions.length}`;
+    }
+
+    function loadQuestion() {
+        document.getElementById("feedback").style.display = "none";
+        document.getElementById("next-btn").classList.add("hidden");
+        updateProgressBar();
+        const q = activeQuestions[currentQuestionIndex];
+        
+        document.getElementById("question-text").innerText = q.q;
+        document.getElementById("year-footer").innerText = `المصدر: اختبارات (${q.year})`;
+        
+        const optionsContainer = document.getElementById("options-container");
+        optionsContainer.innerHTML = "";
+        
+        let shuffledOptions = q.options.map((opt, index) => ({ text: opt, originalIndex: index }));
+        shuffledOptions = shuffleArray(shuffledOptions);
+        
+        shuffledOptions.forEach((optObj) => {
+            const btn = document.createElement("button");
+            btn.innerText = optObj.text;
+            btn.className = "option-btn";
+            btn.onclick = () => checkAnswer(optObj.originalIndex, btn);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(selectedOriginalIndex, btnElement) {
+        const buttons = document.querySelectorAll(".option-btn");
+        buttons.forEach(b => b.disabled = true);
+        const q = activeQuestions[currentQuestionIndex];
+        const feedbackDiv = document.getElementById("feedback");
+        feedbackDiv.style.display = "block";
+
+        if (selectedOriginalIndex === q.ans) {
+            btnElement.classList.add("correct");
+            feedbackDiv.style.backgroundColor = "#e8f5e9";
+            feedbackDiv.style.color = "#2e7d32";
+            feedbackDiv.innerText = "إجابة صحيحة ✔️\nالتعليل: " + q.exp;
+            if (!isRetryMode) score += 2; 
+        } else {
+            btnElement.classList.add("wrong");
+            buttons.forEach(b => { if (b.innerText === q.options[q.ans]) b.classList.add("correct"); });
+            feedbackDiv.style.backgroundColor = "#ffebee";
+            feedbackDiv.style.color = "#c62828";
+            feedbackDiv.innerText = "إجابة خاطئة ❌\nالصواب: " + q.options[q.ans];
+            if (!isRetryMode) { wrongQuestionsLog.push(q.q); wrongQuestionsObjects.push(q); }
+        }
+        document.getElementById("next-btn").classList.remove("hidden");
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < activeQuestions.length) loadQuestion();
+        else endQuiz();
+    }
+
+    function endQuiz() {
+        document.getElementById("quiz-screen").classList.add("hidden");
+        document.getElementById("result-screen").classList.remove("hidden");
+        document.getElementById("progress-bar").style.width = "100%";
+        
+        document.getElementById("student-name-display").innerText = "الطالبة: " + studentName;
+        document.getElementById("score").innerText = score;
+        const totalPossible = isRetryMode ? score : (activeQuestions.length * 2); 
+        document.getElementById("total-score").innerText = activeQuestions.length * 2;
+
+        const retryBtn = document.getElementById("retry-btn");
+        if (wrongQuestionsObjects.length > 0 && !isRetryMode) {
+            document.getElementById("result-title").innerText = "يوجد أخطاء تحتاج للتصحيح!";
+            retryBtn.classList.remove("hidden");
+        } else {
+            document.getElementById("result-title").innerText = "عمل رائع! التدريب مكتمل بنجاح.";
+            retryBtn.classList.add("hidden");
+        }
+
+        if (!isRetryMode) sendDataToSheet(totalPossible);
+        else document.getElementById("saving-msg").classList.add("hidden");
+    }
+
+    function retryWrongQuestions() {
+        isRetryMode = true;
+        activeQuestions = shuffleArray([...wrongQuestionsObjects]);
+        wrongQuestionsObjects = [];
+        currentQuestionIndex = 0;
+        document.getElementById("result-screen").classList.add("hidden");
+        document.getElementById("quiz-screen").classList.remove("hidden");
+        loadQuestion();
+    }
+
+    function sendDataToSheet(totalPossible) {
+        const payload = { name: studentName + " (النون الساكنة)", score: score, total: totalPossible, wrongQuestions: wrongQuestionsLog };
+        fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        .then(() => {
+            document.getElementById("saving-msg").innerText = "تم حفظ النتيجة بنجاح في سجل المعلمة ✔️";
+            document.getElementById("saving-msg").style.color = "#27ae60";
+        }).catch(err => {
+            document.getElementById("saving-msg").innerText = "حدث خطأ أثناء حفظ النتيجة.";
+            document.getElementById("saving-msg").style.color = "#e74c3c";
+        });
+    }
+</script>
+</body>
+</html>
