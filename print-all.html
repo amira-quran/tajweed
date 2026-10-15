@@ -16,7 +16,7 @@
         .btn-teacher { background-color: #27ae60; }
         .btn-teacher:hover { background-color: #219a52; }
         
-        .lesson-content { display: none; } /* مخفي افتراضياً */
+        .lesson-content { display: none; }
         
         .a4-page { width: 210mm; min-height: 297mm; padding: 20mm; margin: 10mm auto; border: 1px #D3D3D3 solid; border-radius: 5px; background: white; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); box-sizing: border-box; }
         .header { text-align: center; border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 20px; }
@@ -33,7 +33,6 @@
             .controls { display: none !important; }
             .a4-page { margin: 0; border: initial; border-radius: initial; width: initial; min-height: initial; box-shadow: initial; page-break-after: always; }
             .a4-page:last-child { page-break-after: auto; }
-            .lesson-content { display: block; } /* سيتم التحكم فيه عبر الجافاسكريبت */
         }
     </style>
 </head>
@@ -44,27 +43,34 @@
         
         <!-- أزرار درس التفخيم -->
         <div class="btn-group">
-            <h3>درس: أحكام التفخيم والتحذيرات الأدائية</h3>
+            <h3>1. درس: أحكام التفخيم والتحذيرات الأدائية</h3>
             <button class="btn" onclick="printSection('tafkheem-student')">طباعة نسخة الطالبات (فارغة)</button>
             <button class="btn btn-teacher" onclick="printSection('tafkheem-teacher')">طباعة نسخة المعلمة (مجابة)</button>
         </div>
 
         <!-- أزرار درس الإدغام -->
         <div class="btn-group">
-            <h3>درس: أحكام الإدغام</h3>
+            <h3>2. درس: أحكام الإدغام</h3>
             <button class="btn" onclick="printSection('idgham-student')">طباعة نسخة الطالبات (فارغة)</button>
             <button class="btn btn-teacher" onclick="printSection('idgham-teacher')">طباعة نسخة المعلمة (مجابة)</button>
         </div>
 
         <!-- أزرار درس الضاد والظاء -->
         <div class="btn-group">
-            <h3>درس: باب الضاد والظاء</h3>
+            <h3>3. درس: باب الضاد والظاء</h3>
             <button class="btn" onclick="printSection('dhad-student')">طباعة نسخة الطالبات (فارغة)</button>
             <button class="btn btn-teacher" onclick="printSection('dhad-teacher')">طباعة نسخة المعلمة (مجابة)</button>
         </div>
+
+        <!-- أزرار درس النون الساكنة والتنوين -->
+        <div class="btn-group">
+            <h3>4. درس: باب أحكام النون الساكنة والتنوين</h3>
+            <button class="btn" onclick="printSection('noon-student')">طباعة نسخة الطالبات (فارغة)</button>
+            <button class="btn btn-teacher" onclick="printSection('noon-teacher')">طباعة نسخة المعلمة (مجابة)</button>
+        </div>
     </div>
 
-    <!-- ==================== قسم التفخيم ==================== -->
+    <!-- ==================== 1. قسم التفخيم ==================== -->
     <div id="tafkheem-student" class="lesson-content">
         <div class="a4-page">
             <div class="header">
@@ -122,7 +128,7 @@
         </div>
     </div>
 
-    <!-- ==================== قسم الإدغام ==================== -->
+    <!-- ==================== 2. قسم الإدغام ==================== -->
     <div id="idgham-student" class="lesson-content">
         <div class="a4-page">
             <div class="header">
@@ -164,7 +170,7 @@
         </div>
     </div>
 
-    <!-- ==================== قسم الضاد والظاء ==================== -->
+    <!-- ==================== 3. قسم الضاد والظاء ==================== -->
     <div id="dhad-student" class="lesson-content">
         <div class="a4-page">
             <div class="header">
@@ -222,21 +228,52 @@
         </div>
     </div>
 
-    <!-- جافاسكريبت للتحكم في الطباعة -->
+    <!-- ==================== 4. قسم النون الساكنة والتنوين ==================== -->
+    <div id="noon-student" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>أوراق عمل باب أحكام النون الساكنة والتنوين - المستوى الخامس</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info">
+                <span>اسم الطالبة: .................................................</span>
+                <span>الدرجة: ........ / 8</span>
+            </div>
+            <ol class="question-list">
+                <li>المراد من قول ابن الجزري (والقلب عند البا بغنة) هو: <br>
+                    [ ] تحويل التنوين إلى نون ساكنة &nbsp;&nbsp; [ ] تحويل النون الساكنة والتنوين إلى ميم &nbsp;&nbsp; [ ] تحويل الباء إلى ميم ساكنة
+                </li>
+                <li>يترتب على وقوع النون الساكنة أو نون التنوين قبل حرف الباء قلب النون إلى .................... ويكون حكمها حينئذ ....................</li>
+                <li>استشهد من المقدمة الجزرية على أحكام النون الساكنة والتنوين؟ <span class="answer-blank">(........................................................................................)</span></li>
+                <li>استشهد من أبيات الجزرية على الإدغام بغنة في حروف (يومن)؟ <span class="answer-blank">(........................................................................................)</span></li>
+            </ol>
+        </div>
+    </div>
+
+    <div id="noon-teacher" class="lesson-content">
+        <div class="a4-page">
+            <div class="header">
+                <h2>نموذج إجابة: باب أحكام النون الساكنة والتنوين</h2>
+                <h3>إعداد وتصميم المعلمة الأولى: أميرة محمد السيد</h3>
+            </div>
+            <div class="student-info" style="color: #27ae60;"><span>خاص بالمعلمة (مجاب)</span></div>
+            <ol class="question-list">
+                <li>المراد من قول ابن الجزري (والقلب عند البا بغنة) هو: <span class="answer-filled">[ تحويل النون الساكنة والتنوين إلى ميم ]</span></li>
+                <li>يترتب على وقوع النون الساكنة أو نون التنوين قبل حرف الباء: <span class="answer-filled">قلب النون إلى (ميم) ويكون حكمها حينئذ (الإخفاء).</span></li>
+                <li>استشهد من المقدمة الجزرية على أحكام النون الساكنة والتنوين؟ <span class="answer-filled">(وَحُكْمُ تَنْوِينٍ وَنُونٍ يُلْفَى ... إِظْهَارٌ ادْغَامٌ وَقَلْبٌ اخْفَا)</span></li>
+                <li>استشهد من أبيات الجزرية على الإدغام بغنة في حروف (يومن)؟ <span class="answer-filled">(وَأَدْغِمَنْ بِغُنَّةٍ فِي يُومِنُ ... إِلَّا بِكِلْمَةٍ كَدُنْيَا عَنْوَنُوا)</span></li>
+            </ol>
+        </div>
+    </div>
+
     <script>
         function printSection(sectionId) {
-            // إخفاء جميع الأقسام أولاً
             var sections = document.getElementsByClassName('lesson-content');
             for (var i = 0; i < sections.length; i++) {
                 sections[i].style.display = 'none';
             }
-            // إظهار القسم المطلوب فقط
             document.getElementById(sectionId).style.display = 'block';
-            
-            // استدعاء نافذة الطباعة
             window.print();
-            
-            // إعادة إخفاء القسم بعد الطباعة ليعود للصفحة الرئيسية
             setTimeout(function() {
                 document.getElementById(sectionId).style.display = 'none';
             }, 1000);
