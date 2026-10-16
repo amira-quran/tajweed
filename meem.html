@@ -1,316 +1,264 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>تدريب أحكام النون والميم المشددتين والميم الساكنة</title>
-    <style>
-        :root {
-            --primary: #d35400; /* لون برتقالي نحاسي مميز لهذا الباب */
-            --secondary: #e67e22;
-            --success: #27ae60;
-            --danger: #e74c3c;
-            --bg: #fdfaf6;
-            --text: #333;
-        }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; }
-        .container { background: white; padding: 25px 20px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); width: 100%; max-width: 650px; box-sizing: border-box; position: relative; margin-bottom: 20px; }
-        h2 { text-align: center; color: var(--primary); margin-top: 0; font-size: 1.45rem; line-height: 1.5; }
-        .input-group { margin: 20px 0; text-align: center; }
-        input[type="text"] { width: 90%; padding: 12px; border: 2px solid #bdc3c7; border-radius: 8px; font-size: 16px; text-align: center; outline: none; margin-bottom: 15px; font-family: inherit; }
-        input[type="text"]:focus { border-color: var(--secondary); }
-        button.start-btn { background-color: var(--secondary); color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-size: 16px; width: 90%; font-weight: bold; }
-        .progress-bar-container { width: 100%; background-color: #e0e0e0; border-radius: 8px; margin-bottom: 10px; height: 12px; overflow: hidden; }
-        .progress-bar { height: 100%; background-color: var(--success); width: 0%; transition: width 0.4s ease; }
-        .progress-text { font-size: 0.9rem; color: #7f8c8d; text-align: center; margin-bottom: 15px; font-weight: bold; }
-        .badge { display: inline-block; background-color: #f39c12; color: white; font-size: 0.8rem; padding: 4px 8px; border-radius: 4px; margin-bottom: 10px; }
-        .question-text { font-size: 1.2rem; line-height: 1.5; margin-bottom: 20px; font-weight: bold; color: var(--primary); }
-        .option-btn { display: block; width: 100%; margin: 10px 0; background-color: #fff; color: var(--text); border: 2px solid #ecf0f1; padding: 15px; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: all 0.2s; text-align: right; line-height: 1.5; }
-        .option-btn:hover:not(:disabled) { border-color: var(--secondary); background-color: #fef5ec; }
-        .correct { background-color: var(--success) !important; color: white !important; border-color: var(--success) !important; }
-        .wrong { background-color: var(--danger) !important; color: white !important; border-color: var(--danger) !important; }
-        #feedback { margin-top: 15px; padding: 12px; border-radius: 8px; display: none; font-size: 0.95rem; line-height: 1.4; font-weight: bold; }
-        .next-btn-container { text-align: center; margin-top: 20px; }
-        #next-btn { background-color: var(--primary); color: white; border: none; padding: 10px 25px; border-radius: 8px; font-size: 1rem; cursor: pointer; width: 100%; }
-        .year-footer { margin-top: 20px; font-size: 0.8rem; color: #95a5a6; text-align: left; border-top: 1px solid #eee; padding-top: 10px; }
-        .hidden { display: none !important; }
-        .result-container { text-align: center; }
-        .score-display { font-size: 2.5rem; color: var(--success); font-weight: bold; margin: 20px 0; }
-        .retry-btn { background-color: #c0392b; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 1rem; width: 100%; margin-top: 15px;}
-        .teacher-footer { text-align: center; color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; padding: 10px; max-width: 650px; width: 100%; border-top: 2px solid #ddd; margin-top: auto; }
-        .teacher-footer strong { color: var(--primary); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>تدريب أحكام النون والميم المشددتين والميم الساكنة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script>(function(){var t;try{t=localStorage.getItem('th')}catch(e){}if(!t)t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()</script>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#fdfaf6;--glow:#fef5ec;--card:#fff;--ink:#333;--mut:#7f8c8d;--line:#ecf0f1;--pri:#d35400;--pri2:#fae5d3;--ok:#27ae60;--okb:#e8f5e9;--no:#e74c3c;--nob:#ffebee;--wn:#f39c12;--wnb:#fef5ec;--hl:#8e44ad;--onhl:#fff;--c0:#0284c7;--c1:#10b981;--c2:#f59e0b;--c3:#8b5cf6;--c4:#ec4899;--sh:0 8px 20px rgba(0,0,0,0.08);color-scheme:light}
+[data-theme=dark]{--bg:#121212;--glow:#1e1e1e;--card:#1e1e1e;--ink:#e0e0e0;--mut:#9e9e9e;--line:#333;--pri:#e67e22;--pri2:#3e2723;--ok:#43dd9a;--okb:#1b5e20;--no:#ff5252;--nob:#b71c1c;--wn:#ffb300;--wnb:#ff6f0033;--hl:#ab47bc;--onhl:#fff;--sh:0 8px 20px rgba(0,0,0,0.5);color-scheme:dark}
+body{margin:0;font:16px/1.7 Cairo,system-ui,sans-serif;color:var(--ink);background:radial-gradient(800px 380px at 90% -80px,var(--glow),transparent 70%),var(--bg) fixed;min-height:100vh;transition:color .4s, background .4s}
+.bar{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 82%,transparent);padding:calc(8px + env(safe-area-inset-top)) 16px 0;border-bottom:1px solid var(--line)}
+.bar>div{max-width:840px;margin:auto;display:flex;align-items:center;gap:12px}
+.bar b{font-size:15px;flex:1; color: var(--pri);}
+.cnt{font-size:13px;color:var(--mut);font-variant-numeric:tabular-nums;font-weight:700}
+#th{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--card);font-size:19px;cursor:pointer;transition:transform .4s}
+#th:active{transform:rotate(60deg) scale(.88)}
+.pg{height:4px;margin:8px -16px 0;background:var(--line)}.pg i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pri),var(--ok));transition:width .45s cubic-bezier(.3,1.3,.5,1)}
+main{max-width:840px;margin:auto;padding:16px 16px 40px}
+.ministry{display:flex;justify-content:center;align-items:center;font-size:13px;font-weight:700;color:var(--mut);margin-bottom:12px;padding:0 6px;text-align:center;}
+.hero{position:relative;overflow:hidden;border-radius:24px;padding:26px 22px;background:linear-gradient(135deg,#d35400,#e67e22 60%,#f39c12);color:#fff;box-shadow:var(--sh)}
+.hero h1{margin:0 0 4px;font-size:clamp(21px,4.8vw,29px);line-height:1.4;font-weight:800}.hero p{margin:3px 0;opacity:.94;font-size:15px}
+.tags{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}.tags span{color:#fff;background:#ffffff24;border:1px solid #ffffff40;padding:4px 12px;border-radius:99px;font-size:12.5px;font-weight:700}
+.bb{position:absolute;bottom:-30px;border-radius:50%;border:2px solid #ffffff55;background:#ffffff14;animation:fl 7s ease-in infinite}
+@keyframes fl{from{transform:translateY(0);opacity:0}25%{opacity:1}to{transform:translateY(-220px);opacity:0}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin:16px 0;box-shadow:var(--sh);transition:opacity .5s,transform .5s,background .4s,border-color .4s}
+.card.rv{opacity:0;transform:translateY(16px)}.card.rv.in{opacity:1;transform:none}
+.info{display:grid;gap:12px;grid-template-columns:1fr}
+.info label{font-weight:700;font-size:15px;color:var(--pri);display:block;margin-bottom:6px}
+.info input{width:100%;font:inherit;font-size:16px;padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--bg);color:var(--ink);transition:border .2s,box-shadow .2s;text-align:center;}
+.info input:focus{outline:0;border-color:var(--pri);box-shadow:0 0 0 4px color-mix(in srgb,var(--pri) 22%,transparent)}
+.err{animation:sk .4s;border-color:var(--no)!important}
+.card header{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;flex-wrap:wrap}
+.no{flex:none;width:34px;height:34px;border-radius:10px;background:var(--pri);color:var(--card);display:grid;place-items:center;font-size:15px}
+h3{margin:0;font-size:16.5px;line-height:1.7;flex:1;min-width:200px}
+.badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.pt{font-size:12px;font-weight:700;color:var(--pri);background:var(--pri2);padding:2px 10px;border-radius:99px;white-space:nowrap}
+.sk-tag{font-size:11.5px;font-weight:700;color:#fff;background:#8e44ad;padding:2px 10px;border-radius:99px;white-space:nowrap}
+.sub{padding:12px 0 6px;border-radius:12px}
+.lb{font-weight:700;margin-bottom:12px;font-size:16px; color: var(--pri); line-height: 1.5;}
+.opts{display:grid;gap:10px;grid-template-columns:1fr;}
+.opt{display:flex;align-items:center;gap:10px;min-height:50px;padding:12px 16px;text-align:start;font:inherit;font-size:15px;line-height:1.5;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:14px;cursor:pointer;transition:transform .15s,border-color .2s,background .2s,box-shadow .2s}
+.opt:active{transform:scale(.97)}.opts:not(.done) .opt:hover{border-color:var(--pri); background:var(--glow);}.opt:focus-visible{outline:3px solid var(--pri);outline-offset:2px}
+.rd{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--mut);transition:.2s}
+.opt.sel{border-color:var(--pri);background:var(--pri2);box-shadow:0 6px 16px -8px var(--pri)}.opt.sel .rd{border:6px solid var(--pri);animation:pop .3s}
+@keyframes pop{50%{transform:scale(1.4)}}
+.done .opt{cursor:default;opacity:.6}.done .opt.ok,.done .opt.bad{opacity:1}
+.opt.ok{border-color:var(--ok);background:var(--okb)}.opt.ok .rd{border:6px solid var(--ok)}
+.opt.bad{border-color:var(--no);background:var(--nob);animation:sk .4s}.opt.bad .rd{border:6px solid var(--no)}
+.opt.ok::after,.opt.bad::after{content:'✓';margin-inline-start:auto;font-weight:700;color:var(--ok)}.opt.bad::after{content:'✗';color:var(--no)}
+@keyframes sk{25%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
+.sub.miss{animation:ms 1.4s}@keyframes ms{0%,60%{background:var(--wnb)}}
+.fb{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s}.fb.on{grid-template-rows:1fr}.fb>div{overflow:hidden}
+.fb p{margin:10px 0 4px;padding:12px 16px;border-radius:12px;font-size:14.5px; font-weight: bold; line-height: 1.6;}
+.fb .g{background:var(--okb);border-inline-start:4px solid var(--ok); color: var(--ok);}.fb .r{background:var(--nob);border-inline-start:4px solid var(--no); color: var(--no);}
+.btn{width:100%;min-height:56px;font:700 18px Cairo,sans-serif;border:0;border-radius:16px;cursor:pointer;color:#fff;background:linear-gradient(135deg,#d35400,#f39c12);box-shadow:var(--sh);transition:transform .15s,filter .2s}
+.btn:active{transform:scale(.98)}.btn:hover{filter:brightness(1.08)}.btn.rt{background:linear-gradient(135deg,#c0392b,#e74c3c);margin-top:14px}
+#res{display:none;text-align:center}#res.show{display:block;animation:up .6s both}@keyframes up{from{opacity:0;transform:translateY(20px)}}
+.rw{position:relative;width:145px;margin:auto}.ring{width:145px;display:block;transform:rotate(-90deg)}.ring circle{fill:none;stroke-width:9;stroke-linecap:round}.rb{stroke:var(--line)}
+.rf{stroke:var(--c);stroke-dasharray:100;stroke-dashoffset:100;transition:stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)}
+.rn{position:absolute;inset:0;display:grid;place-items:center;font-size:30px;font-weight:800; color: var(--pri);}
+#res h2{margin:10px 0 0; color: var(--ink);}#res p{margin:4px 0; color: var(--mut);}.st{font-size:14px;color:var(--mut); margin-top: 10px; font-weight: bold;}
+.ts{position:fixed;inset-inline:16px;bottom:calc(20px + env(safe-area-inset-bottom));max-width:420px;margin:auto;background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:14px;font-weight:600;text-align:center;transform:translateY(160%);transition:transform .4s cubic-bezier(.3,1.4,.5,1);z-index:30}.ts.on{transform:none}
+.foot{text-align:center;font-size:14px;color:var(--mut);margin-top:24px;font-weight:700; border-top: 2px solid var(--line); padding-top: 16px;}
+.foot strong { color: var(--pri); }
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
 </head>
 <body>
+<div class="bar">
+  <div>
+    <b>تدريب أحكام التجويد</b>
+    <span class="cnt" id="cnt">0 / 0</span>
+    <button id="th" type="button" aria-label="تبديل الوضع الفاتح والداكن"></button>
+  </div>
+  <div class="pg"><i id="pg"></i></div>
+</div>
 
-<div class="container" id="login-screen">
-    <h2>تدريب باب أحكام النون والميم المشددتين والميم الساكنة</h2>
-    <div class="input-group">
-        <p>الرجاء إدخال اسمك للبدء في الاختبار (8 أسئلة):</p>
-        <input type="text" id="student-name" placeholder="الاسم الثلاثي">
+<main>
+  <div class="ministry">
+    <div>مركز جويرية بنت الحارث | للاستفسار: 36837886</div>
+  </div>
+
+  <div class="hero">
+    <span class="bb" style="left:10%;width:22px;height:22px"></span>
+    <span class="bb" style="left:28%;width:14px;height:14px;animation-delay:2s"></span>
+    <span class="bb" style="left:55%;width:26px;height:26px;animation-delay:4s"></span>
+    <span class="bb" style="left:80%;width:16px;height:16px;animation-delay:1s"></span>
+    <h1>تدريب أحكام النون والميم المشددتين والميم الساكنة</h1>
+    <p>الدرجة الكلية: 16 درجة (8 أسئلة)</p>
+    <div class="tags">
+      <span>✨ أسئلة معتمدة من الوزارة</span>
+      <span>📖 تجويد</span>
     </div>
-    <div style="text-align: center;">
-        <button class="start-btn" onclick="startQuiz()">ابدأ التدريب</button>
+  </div>
+
+  <form id="f" novalidate>
+    <div class="card info">
+      <div>
+        <label for="nm">الرجاء إدخال اسمك للبدء في الاختبار:</label>
+        <input id="nm" autocomplete="name" placeholder="الاسم الثلاثي">
+      </div>
     </div>
-</div>
 
-<div class="container hidden" id="quiz-screen">
-    <div class="progress-bar-container"><div id="progress-bar" class="progress-bar"></div></div>
-    <div class="progress-text" id="progress-text"></div>
-    
-    <div id="badge-container"><span class="badge">أسئلة معتمدة من الوزارة</span></div>
-    <div class="question-text" id="question-text"></div>
-    <div id="options-container"></div>
-    <div id="feedback"></div>
-    
-    <div class="next-btn-container">
-        <button id="next-btn" class="hidden" onclick="nextQuestion()">السؤال التالي</button>
-    </div>
-    <div class="year-footer" id="year-footer"></div>
-</div>
+    <div id="qs"></div>
+    <button class="btn" id="sb" type="submit">إرسال الإجابات وعرض النتيجة (من 16)</button>
+  </form>
 
-<div class="container hidden result-container" id="result-screen">
-    <h2 id="result-title">انتهى التدريب!</h2>
-    <p style="font-size: 1.2rem;" id="student-name-display"></p>
-    <div class="score-display"><span id="score"></span> / <span id="total-score"></span></div>
-    <p id="saving-msg" style="color: #7f8c8d;">جاري حفظ النتيجة في السجل...</p>
-    <button id="retry-btn" class="retry-btn hidden" onclick="retryWrongQuestions()">إعادة حل الأسئلة الخاطئة</button>
-</div>
+  <section class="card" id="res"></section>
+  <div class="foot">
+    إعداد وتصميم المعلمة الأولى: <strong>أميرة محمد السيد</strong><br>
+    بمركز جويرية بنت الحارث
+  </div>
+</main>
 
-<div class="teacher-footer">
-    إعداد وتصميم المعلمة الأولى: <strong>أميرة محمد السيد</strong> <br>
-    بمركز جويرية بنت الحارث | للاستفسار: 36837886
-</div>
+<div class="ts" id="ts"></div>
 
 <script>
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwStG344rSY9oWOMDAXb2xOavyJpb__dOnohWSVF3gz60-xtYmnm34YKlm40J5sgsrv/exec";
+const GOOGLE_SCRIPT_URL="https://script.google.com/macros/s/AKfycbwStG344rSY9oWOMDAXb2xOavyJpb__dOnohWSVF3gz60-xtYmnm34YKlm40J5sgsrv/exec";
+const MAX_SCORE=16;
+const $=id=>document.getElementById(id);
 
-    const allQuestions = [
-        { 
-            q: "مراتب الغنة في النون والميم هي:", 
-            options: [
-                "خمس مراتب", 
-                "أربع مراتب", 
-                "ثلاث مراتب",
-                "مرتبتان"
-            ], 
-            ans: 0, 
-            exp: "/المتحرك الخامسة .", 
-/الساكن المظهر/الثالثة المخفي والمقلب/الثانية المدغم/الاولى المشددالرابعة 
-            year: "يونيو 2024 / فبراير 2025 / فبراير 2026" 
-        },
-        { 
-            q: "معنى قول الناظم: (وأظهر الغنة من نون ومن ... ميم إذا ما شددا) أي: بين وبالغ في إظهار الغنة الصادرة من نون وميم مشددتين؛ لأنها تكون في أوفى وأكمل مراتبها.", 
-            options: [
-                "صح", 
-                "خطأ"
-            ], 
-            ans: 0, 
-            exp: "أمر الناظم بالمبالغة في إظهار الغنة في النون والميم المشددتين نحو (إنّ) و(ثمّ) لكونها في أكمل مراتبها.", 
-            year: "أبريل 2025 / مايو 2026" 
-        },
-        { 
-            q: "استشهد من المقدمة الجزرية على حكم النون والميم المشددتين؟", 
-            options: [
-                "(وَأَظْهِرِ الْغُنَّةَ مِنْ نُونٍ وَمِنْ ... مِيمٍ إِذَا مَا شُدِّدَا ...)", 
-                "(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)", 
-                "(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)"
-            ], 
-            ans: 0, 
-            exp: "يجب إظهار الغنة وبيانها في النون والميم إذا كانتا مشددتين سواء في كلمة أو كلمتين.", 
-            year: "بنك الأسئلة الوزارية المعتمدة" 
-        },
-        { 
-            q: "استشهد من المقدمة الجزرية على حكم الميم المشددة؟", 
-            options: [
-                "(وَأَظْهِرِ الْغُنَّةَ مِنْ ... مِيمٍ إِذَا مَا شُدِّدَا ...)", 
-                "(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)", 
-                "(وَحُكْمُ تَنْوِينٍ وَنُونٍ يُلْفَى ... إِظْهَارٌ ادْغَامٌ وَقَلْبٌ اخْفَا)"
-            ], 
-            ans: 0, 
-            exp: "التشديد في الميم يشمل المدغمة في مثلها في كلمة أو كلمتين نحو (مَا لَهُم مِّنَ اللَّهِ) فتظهر فيها الغنة.", 
-            year: "بنك الأسئلة الوزارية المعتمدة" 
-        },
-        { 
-            q: "استشهد من كلام المصنف على القول الصحيح المختار من أقوال أهل الأداء لإخفاء الميم الساكنة لدى الباء؟", 
-            options: [
-                "(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)", 
-                "(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)", 
-                "(وَالْقَلْبُ عِنْدَ الْبَا بِغُنَّةٍ كَذَا ... الإِخْفَا لَدَى بَاقِي الْحُرُوفِ أُخِذَا)"
-            ], 
-            ans: 0, 
-            exp: "تُخفى الميم الساكنة بغنة إذا وقع بعدها حرف الباء نحو (يَعْتَصِم بِاللَّهِ) على القول المختار عند الجمهور.", 
-            year: "أبريل 2024 / أكتوبر 2025" 
-        },
-        { 
-            q: "بين القول المختار من أقوال أهل الأداء من عبارة الناظم: (على المختار من أهل الأدا)؟", 
-            options: [
-                "القول المختار هو إخفاء الميم الساكنة عند الباء.", 
-                "القول المختار هو إظهار الميم الساكنة عند الباء بلا غنة.", 
-                "القول المختار هو إدغام الميم الساكنة في الباء إدغاماً كاملاً."
-            ], 
-            ans: 0, 
-            exp: "مذهب الجمهور وابن مجاهد والداني وما اختاره ابن الجزري هو إخفاء الميم الساكنة مع الغنة عند الباء.", 
-            year: "فبراير 2026" 
-        },
-        { 
-            q: "استشهد من المقدمة الجزرية على إظهار الميم الساكنة عند حروف الهجاء؟", 
-            options: [
-                "(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)", 
-                "(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)", 
-                "(وَأَظْهِرِ الْغُنَّةَ مِنْ نُونٍ وَمِنْ ... مِيمٍ إِذَا مَا شُدِّدَا)"
-            ], 
-            ans: 0, 
-            exp: "تُظهر الميم الساكنة عند باقي حروف الهجاء (غير الميم والباء) سواء في كلمة نحو (أَنْعَمْتَ) أو كلمتين.", 
-            year: "فبراير 2025 / أغسطس 2025 / فبراير 2026" 
-        },
-        { 
-            q: "استشهد من قول الناظم على التحذير من إخفاء الميم الساكنة خاصة عند حرفي الواو والفاء؛ لاتحاد مخرجها بالواو وقربها من الفاء؟", 
-            options: [
-                "(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)", 
-                "(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)", 
-                "(وَاحْرِصْ عَلَى السُّكُونِ فِي جَعَلْنَا ... أَنْعَمْتَ وَالْمَغْضُوبِ مَعْ ضَلَلْنَا)"
-            ], 
-            ans: 0, 
-            exp: "حذّر الناظم من اختفاء الميم الساكنة عند الواو والفاء لاتحاد مخرجها بالواو وقربها من الفاء فيسبق اللسان إلى الإخفاء.", 
-            year: "فبراير 2024 / يونيو 2025 / مايو 2026" 
-        }
-    ];
+/* بنية الأسئلة: [النص، الإجابة الصحيحة، الخيارات، التغذية الراجعة، وزن الدرجة] */
+const Q=[
+{t:'السؤال الأول',p:2,sk:'يونيو 24 / فبراير 25 / فبراير 26',s:[
+['مراتب الغنة في النون والميم هي:','خمس مراتب',['خمس مراتب','أربع مراتب','ثلاث مراتب','مرتبتان'],'المرتبة الأولى: المشدد، الثانية: المدغم، الثالثة: المخفى والمقلب، الرابعة: الساكن المظهر، الخامسة: المتحرك.',2]
+]},
+{t:'السؤال الثاني',p:2,sk:'أبريل 2025 / مايو 2026',s:[
+['معنى قول الناظم: (وأظهر الغنة من نون ومن ... ميم إذا ما شددا) أي: بين وبالغ في إظهار الغنة الصادرة من نون وميم مشددتين؛ لأنها تكون في أوفى وأكمل مراتبها.','صح',['صح','خطأ'],'أمر الناظم بالمبالغة في إظهار الغنة في النون والميم المشددتين نحو (إنّ) و(ثمّ) لكونها في أكمل مراتبها.',2]
+]},
+{t:'السؤال الثالث',p:2,sk:'أسئلة وزارية معتمدة',s:[
+['استشهد من المقدمة الجزرية على حكم النون والميم المشددتين؟','(وَأَظْهِرِ الْغُنَّةَ مِنْ نُونٍ وَمِنْ ... مِيمٍ إِذَا مَا شُدِّدَا ...)',['(وَأَظْهِرِ الْغُنَّةَ مِنْ نُونٍ وَمِنْ ... مِيمٍ إِذَا مَا شُدِّدَا ...)','(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)','(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)'],'يجب إظهار الغنة وبيانها في النون والميم إذا كانتا مشددتين سواء في كلمة أو كلمتين.',2]
+]},
+{t:'السؤال الرابع',p:2,sk:'أسئلة وزارية معتمدة',s:[
+['استشهد من المقدمة الجزرية على حكم الميم المشددة؟','(وَأَظْهِرِ الْغُنَّةَ مِنْ ... مِيمٍ إِذَا مَا شُدِّدَا ...)',['(وَأَظْهِرِ الْغُنَّةَ مِنْ ... مِيمٍ إِذَا مَا شُدِّدَا ...)','(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)','(وَحُكْمُ تَنْوِينٍ وَنُونٍ يُلْفَى ... إِظْهَارٌ ادْغَامٌ وَقَلْبٌ اخْفَا)'],'التشديد في الميم يشمل المدغمة في مثلها في كلمة أو كلمتين نحو (مَا لَهُم مِّنَ اللَّهِ) فتظهر فيها الغنة.',2]
+]},
+{t:'السؤال الخامس',p:2,sk:'أبريل 2024 / أكتوبر 2025',s:[
+['استشهد من كلام المصنف على القول الصحيح المختار من أقوال أهل الأداء لإخفاء الميم الساكنة لدى الباء؟','(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)',['(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)','(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)','(وَالْقَلْبُ عِنْدَ الْبَا بِغُنَّةٍ كَذَا ... الإِخْفَا لَدَى بَاقِي الْحُرُوفِ أُخِذَا)'],'تُخفى الميم الساكنة بغنة إذا وقع بعدها حرف الباء نحو (يَعْتَصِم بِاللَّهِ) على القول المختار عند الجمهور.',2]
+]},
+{t:'السؤال السادس',p:2,sk:'فبراير 2026',s:[
+['بين القول المختار من أقوال أهل الأداء من عبارة الناظم: (على المختار من أهل الأدا)؟','القول المختار هو إخفاء الميم الساكنة عند الباء.',['القول المختار هو إخفاء الميم الساكنة عند الباء.','القول المختار هو إظهار الميم الساكنة عند الباء بلا غنة.','القول المختار هو إدغام الميم الساكنة في الباء إدغاماً كاملاً.'],'مذهب الجمهور وابن مجاهد والداني وما اختاره ابن الجزري هو إخفاء الميم الساكنة مع الغنة عند الباء.',2]
+]},
+{t:'السؤال السابع',p:2,sk:'فبراير 25 / أغسطس 25 / فبراير 26',s:[
+['استشهد من المقدمة الجزرية على إظهار الميم الساكنة عند حروف الهجاء؟','(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)',['(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)','(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)','(وَأَظْهِرِ الْغُنَّةَ مِنْ نُونٍ وَمِنْ ... مِيمٍ إِذَا مَا شُدِّدَا)'],'تُظهر الميم الساكنة عند باقي حروف الهجاء (غير الميم والباء) سواء في كلمة نحو (أَنْعَمْتَ) أو كلمتين.',2]
+]},
+{t:'السؤال الثامن',p:2,sk:'فبراير 2024 / يونيو 2025 / مايو 2026',s:[
+['استشهد من قول الناظم على التحذير من إخفاء الميم الساكنة خاصة عند حرفي الواو والفاء؛ لاتحاد مخرجها بالواو وقربها من الفاء؟','(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)',['(وَأَظْهِرَنَّهَا عِنْدَ بَاقِي الْأَحْرُفِ ... وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي)','(وَأَخْفِيَنَّ الْمِيمَ إِنْ تَسْكُنْ بِغُنَّةٍ لَدَى ... بَاءٍ عَلَى الْمُخْتَارِ مِنْ أَهْلِ الْأَدَا)','(وَاحْرِصْ عَلَى السُّكُونِ فِي جَعَلْنَا ... أَنْعَمْتَ وَالْمَغْضُوبِ مَعْ ضَلَلْنَا)'],'حذّر الناظم من اختفاء الميم الساكنة عند الواو والفاء لاتحاد مخرجها بالواو وقربها من الفاء فيسبق اللسان إلى الإخفاء.',2]
+]}
+];
 
-    let studentName = "";
-    let score = 0;
-    let currentQuestionIndex = 0;
-    let activeQuestions = [];
-    let wrongQuestionsLog = []; 
-    let wrongQuestionsObjects = []; 
-    let isRetryMode = false;
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting)return;
+  const el=en.target;io.unobserve(el);
+  if(el.classList.contains('rv'))el.classList.add('in');
+}),{threshold:.25});
 
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
+let S=[],locked=false;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const ptl=p=>p==1?'درجة':p==2?'درجتان':p+' درجات';
+
+function build(){
+  S=[];locked=false;
+  
+  // خلط الأسئلة
+  const shuffledQ = shuf([...Q]);
+  
+  $('qs').innerHTML=shuffledQ.map((q,qi)=>`<section class="card rv"><header><b class="no">${qi+1}</b><h3>${q.t}</h3><div class="badges"><span class="sk-tag">${q.sk}</span><span class="pt">${ptl(q.p)}</span></div></header>${q.s.map(([l,a,o,e,w])=>{
+    const op=o.length===2?o.slice():shuf([a,...o.filter(v=>v!==a)]),id=S.length;
+    S.push({qText: l, a, e, op, ci: op.indexOf(a), sel: -1, w: w || 2});
+    return `<div class="sub"><div class="lb">${l}</div><div class="opts" role="radiogroup" data-s="${id}">${op.map((v,i)=>`<button type="button" role="radio" aria-checked="false" class="opt" data-i="${i}"><span class="rd"></span><span>${v}</span></button>`).join('')}</div><div class="fb"><div></div></div></div>`;
+  }).join('')}</section>`).join('');
+  document.querySelectorAll('.card.rv').forEach(c=>io.observe(c));
+  prog();
+}
+
+const prog=()=>{const n=S.filter(s=>s.sel>=0).length;$('cnt').textContent=`${n} / ${S.length}`;$('pg').style.width=n/S.length*100+'%'};
+let tm;const toast=m=>{const t=$('ts');t.textContent=m;t.classList.add('on');clearTimeout(tm);tm=setTimeout(()=>t.classList.remove('on'),2600)};
+
+$('qs').onclick=e=>{
+  const b=e.target.closest('.opt');if(!b||locked)return;
+  const g=b.parentNode;S[g.dataset.s].sel=+b.dataset.i;
+  [...g.children].forEach(c=>{c.classList.toggle('sel',c===b);c.setAttribute('aria-checked',c===b)});
+  g.parentNode.classList.remove('miss');prog();
+  navigator.vibrate&&navigator.vibrate(8);
+};
+
+const esc=s=>s.replace(/[<>&"']/g,c=>'&#'+c.charCodeAt(0)+';');
+$('f').onsubmit=e=>{
+  e.preventDefault();if(locked)return;
+  const nm=$('nm').value.trim();
+  if(!nm){
+    const el=$('nm');el.classList.remove('err');void el.offsetWidth;el.classList.add('err');
+    el.focus();el.scrollIntoView({behavior:'smooth',block:'center'});
+    toast('الرجاء إدخال اسمك الثلاثي للبدء');return;
+  }
+  const m=S.findIndex(s=>s.sel<0);
+  if(m>=0){
+    const el=document.querySelectorAll('.sub')[m];el.classList.add('miss');
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    toast(`بقي ${S.filter(s=>s.sel<0).length} سؤال بلا إجابة`);return;
+  }
+  
+  locked=true;let sc=0;const els=document.querySelectorAll('.sub');
+  let wrongQuestionsLog = [];
+  
+  S.forEach((s,i)=>{
+    const el=els[i],ops=el.querySelectorAll('.opt'),ok=s.sel===s.ci;
+    if(ok){
+      sc+=s.w;
+    } else {
+      wrongQuestionsLog.push(s.qText); // إضافة السؤال الخاطئ للسجل
     }
+    el.querySelector('.opts').classList.add('done');
+    ops[s.ci].classList.add('ok');if(!ok)ops[s.sel].classList.add('bad');
+    const fb=el.querySelector('.fb');
+    fb.firstChild.innerHTML=`<p class="${ok?'g':'r'}">${ok?'✔ إجابة صحيحة. ':`✘ الإجابة الصحيحة: <b>${s.a}</b>. `}<br>${s.e||''}</p>`;
+    fb.classList.add('on');
+  });
+  
+  const pc=Math.round(sc/MAX_SCORE*100),c=pc>=75?'--ok':pc>=50?'--wn':'--no',msg=pc>=90?'ممتاز يا بطلة! 🌟':pc>=75?'جيد جداً 👏':pc>=50?'جيد، راجعي الأخطاء 📘':'تحتاجين مراجعة، أعيدي المحاولة 💪';
+  const r=$('res');
+  r.innerHTML=`<div class="rw"><svg class="ring" viewBox="0 0 120 120"><circle class="rb" cx="60" cy="60" r="52" pathLength="100"/><circle class="rf" id="rf" style="--c:var(${c})" cx="60" cy="60" r="52" pathLength="100"/></svg><div class="rn" id="rn">0</div></div><h2>${msg}</h2><p>درجتك يا ${esc(nm)} هي <b>${sc}</b> من ${MAX_SCORE} (${pc}%)</p><p class="st" id="st"></p><button class="btn rt" id="rt" type="button">إعادة التدريب مرة أخرى 🔄</button>`;
+  r.classList.add('show');$('sb').hidden=true;r.scrollIntoView({behavior:'smooth',block:'center'});
+  
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    $('rf').style.strokeDashoffset=100-pc;
+    const t0=performance.now(),tk=t=>{
+      const k=Math.min(1,(t-t0)/1400);
+      $('rn').textContent=Math.round(sc*(1-Math.pow(1-k,3))*10)/10;
+      k<1&&requestAnimationFrame(tk);
+    };
+    requestAnimationFrame(tk);
+  }));
+  
+  $('rt').onclick=()=>{r.classList.remove('show');$('sb').hidden=false;build();scrollTo({top:0,behavior:'smooth'})};
+  
+  const st=$('st');
+  if(GOOGLE_SCRIPT_URL){
+    st.textContent='⏳ جاري حفظ النتيجة في سجل المعلمة...';
+    
+    // إرسال البيانات بنفس صيغة ملفك القديم
+    const payload = { 
+      name: nm + " (النون والميم المشددتين والميم الساكنة)", 
+      score: sc, 
+      total: MAX_SCORE, 
+      wrongQuestions: wrongQuestionsLog 
+    };
+    
+    fetch(GOOGLE_SCRIPT_URL,{
+      method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    }).then(()=>st.textContent='✅ تم حفظ النتيجة بنجاح في سجل المعلمة!')
+      .catch(()=>st.textContent='⚠️ تعذر الاتصال بالسجل، ولكن تم عرض نتيجتك أعلاه.');
+  }
+};
 
-    function startQuiz() {
-        const nameInput = document.getElementById("student-name").value.trim();
-        if (nameInput === "") { alert("يرجى إدخال اسمك للمتابعة."); return; }
-        
-        studentName = nameInput; 
-        activeQuestions = shuffleArray([...allQuestions]);
-        
-        document.getElementById("login-screen").classList.add("hidden");
-        document.getElementById("quiz-screen").classList.remove("hidden");
-        
-        score = 0; wrongQuestionsLog = []; wrongQuestionsObjects = []; currentQuestionIndex = 0;
-        loadQuestion();
-    }
-
-    function updateProgressBar() {
-        const progressPercentage = (currentQuestionIndex / activeQuestions.length) * 100;
-        document.getElementById("progress-bar").style.width = progressPercentage + "%";
-        document.getElementById("progress-text").innerText = `السؤال ${currentQuestionIndex + 1} من ${activeQuestions.length}`;
-    }
-
-    function loadQuestion() {
-        document.getElementById("feedback").style.display = "none";
-        document.getElementById("next-btn").classList.add("hidden");
-        updateProgressBar();
-        const q = activeQuestions[currentQuestionIndex];
-        
-        document.getElementById("question-text").innerText = q.q;
-        document.getElementById("year-footer").innerText = `المصدر: اختبارات (${q.year})`;
-        
-        const optionsContainer = document.getElementById("options-container");
-        optionsContainer.innerHTML = "";
-        
-        let shuffledOptions = q.options.map((opt, index) => ({ text: opt, originalIndex: index }));
-        shuffledOptions = shuffleArray(shuffledOptions);
-        
-        shuffledOptions.forEach((optObj) => {
-            const btn = document.createElement("button");
-            btn.innerText = optObj.text;
-            btn.className = "option-btn";
-            btn.onclick = () => checkAnswer(optObj.originalIndex, btn);
-            optionsContainer.appendChild(btn);
-        });
-    }
-
-    function checkAnswer(selectedOriginalIndex, btnElement) {
-        const buttons = document.querySelectorAll(".option-btn");
-        buttons.forEach(b => b.disabled = true);
-        const q = activeQuestions[currentQuestionIndex];
-        const feedbackDiv = document.getElementById("feedback");
-        feedbackDiv.style.display = "block";
-
-        if (selectedOriginalIndex === q.ans) {
-            btnElement.classList.add("correct");
-            feedbackDiv.style.backgroundColor = "#e8f5e9";
-            feedbackDiv.style.color = "#2e7d32";
-            feedbackDiv.innerText = "إجابة صحيحة ✔️\nالتعليل: " + q.exp;
-            if (!isRetryMode) score += 2; 
-        } else {
-            btnElement.classList.add("wrong");
-            buttons.forEach(b => { if (b.innerText === q.options[q.ans]) b.classList.add("correct"); });
-            feedbackDiv.style.backgroundColor = "#ffebee";
-            feedbackDiv.style.color = "#c62828";
-            feedbackDiv.innerText = "إجابة خاطئة ❌\nالصواب: " + q.options[q.ans];
-            if (!isRetryMode) { wrongQuestionsLog.push(q.q); wrongQuestionsObjects.push(q); }
-        }
-        document.getElementById("next-btn").classList.remove("hidden");
-    }
-
-    function nextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < activeQuestions.length) loadQuestion();
-        else endQuiz();
-    }
-
-    function endQuiz() {
-        document.getElementById("quiz-screen").classList.add("hidden");
-        document.getElementById("result-screen").classList.remove("hidden");
-        document.getElementById("progress-bar").style.width = "100%";
-        
-        document.getElementById("student-name-display").innerText = "الطالبة: " + studentName;
-        document.getElementById("score").innerText = score;
-        const totalPossible = isRetryMode ? score : (activeQuestions.length * 2); 
-        document.getElementById("total-score").innerText = activeQuestions.length * 2;
-
-        const retryBtn = document.getElementById("retry-btn");
-        if (wrongQuestionsObjects.length > 0 && !isRetryMode) {
-            document.getElementById("result-title").innerText = "يوجد أخطاء تحتاج للتصحيح!";
-            retryBtn.classList.remove("hidden");
-        } else {
-            document.getElementById("result-title").innerText = "عمل رائع! التدريب مكتمل بنجاح.";
-            retryBtn.classList.add("hidden");
-        }
-
-        if (!isRetryMode) sendDataToSheet(totalPossible);
-        else document.getElementById("saving-msg").classList.add("hidden");
-    }
-
-    function retryWrongQuestions() {
-        isRetryMode = true;
-        activeQuestions = shuffleArray([...wrongQuestionsObjects]);
-        wrongQuestionsObjects = [];
-        currentQuestionIndex = 0;
-        document.getElementById("result-screen").classList.add("hidden");
-        document.getElementById("quiz-screen").classList.remove("hidden");
-        loadQuestion();
-    }
-
-    function sendDataToSheet(totalPossible) {
-        const payload = { name: studentName + " (النون والميم المشددتين والميم الساكنة)", score: score, total: totalPossible, wrongQuestions: wrongQuestionsLog };
-        fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-        .then(() => {
-            document.getElementById("saving-msg").innerText = "تم حفظ النتيجة بنجاح في سجل المعلمة ✔️";
-            document.getElementById("saving-msg").style.color = "#27ae60";
-        }).catch(err => {
-            document.getElementById("saving-msg").innerText = "حدث خطأ أثناء حفظ النتيجة.";
-            document.getElementById("saving-msg").style.color = "#e74c3c";
-        });
-    }
+const th=$('th'),ic=()=>th.textContent=document.documentElement.dataset.theme==='dark'?'☀️':'🌙';
+th.onclick=()=>{const d=document.documentElement,t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;try{localStorage.setItem('th',t)}catch(e){}ic()};
+ic();build();
 </script>
 </body>
 </html>
