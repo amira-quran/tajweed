@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تدريب باب أحكام المد</title>
+    <style>
+        :root {
+            --primary: #117a65; /* لون أخضر زمردي مميز لباب المد */
+            --secondary: #16a085;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --bg: #f4f9f8;
+            --text: #333;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 15px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: white; padding: 25px 20px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); width: 100%; max-width: 650px; box-sizing: border-box; position: relative; margin-bottom: 20px; }
+        h2 { text-align: center; color: var(--primary); margin-top: 0; font-size: 1.5rem; line-height: 1.5; }
+        .input-group { margin: 20px 0; text-align: center; }
+        input[type="text"] { width: 90%; padding: 12px; border: 2px solid #bdc3c7; border-radius: 8px; font-size: 16px; text-align: center; outline: none; margin-bottom: 15px; font-family: inherit; }
+        input[type="text"]:focus { border-color: var(--secondary); }
+        button.start-btn { background-color: var(--secondary); color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-size: 16px; width: 90%; font-weight: bold; }
+        .progress-bar-container { width: 100%; background-color: #e0e0e0; border-radius: 8px; margin-bottom: 10px; height: 12px; overflow: hidden; }
+        .progress-bar { height: 100%; background-color: var(--success); width: 0%; transition: width 0.4s ease; }
+        .progress-text { font-size: 0.9rem; color: #7f8c8d; text-align: center; margin-bottom: 15px; font-weight: bold; }
+        .badge { display: inline-block; background-color: #f39c12; color: white; font-size: 0.8rem; padding: 4px 8px; border-radius: 4px; margin-bottom: 10px; }
+        .question-text { font-size: 1.2rem; line-height: 1.5; margin-bottom: 20px; font-weight: bold; color: var(--primary); }
+        .option-btn { display: block; width: 100%; margin: 10px 0; background-color: #fff; color: var(--text); border: 2px solid #ecf0f1; padding: 15px; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: all 0.2s; text-align: right; line-height: 1.5; }
+        .option-btn:hover:not(:disabled) { border-color: var(--secondary); background-color: #e8f8f5; }
+        .correct { background-color: var(--success) !important; color: white !important; border-color: var(--success) !important; }
+        .wrong { background-color: var(--danger) !important; color: white !important; border-color: var(--danger) !important; }
+        #feedback { margin-top: 15px; padding: 12px; border-radius: 8px; display: none; font-size: 0.95rem; line-height: 1.4; font-weight: bold; }
+        .next-btn-container { text-align: center; margin-top: 20px; }
+        #next-btn { background-color: var(--primary); color: white; border: none; padding: 10px 25px; border-radius: 8px; font-size: 1rem; cursor: pointer; width: 100%; }
+        .year-footer { margin-top: 20px; font-size: 0.8rem; color: #95a5a6; text-align: left; border-top: 1px solid #eee; padding-top: 10px; }
+        .hidden { display: none !important; }
+        .result-container { text-align: center; }
+        .score-display { font-size: 2.5rem; color: var(--success); font-weight: bold; margin: 20px 0; }
+        .retry-btn { background-color: #e67e22; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 1rem; width: 100%; margin-top: 15px;}
+        .teacher-footer { text-align: center; color: #7f8c8d; font-size: 0.95rem; line-height: 1.6; padding: 10px; max-width: 650px; width: 100%; border-top: 2px solid #ddd; margin-top: auto; }
+        .teacher-footer strong { color: var(--primary); }
+    </style>
+</head>
+<body>
+
+<div class="container" id="login-screen">
+    <h2>تدريب باب أحكام المد</h2>
+    <div class="input-group">
+        <p>الرجاء إدخال اسمك للبدء في الاختبار (20 سؤالاً):</p>
+        <input type="text" id="student-name" placeholder="الاسم الثلاثي">
+    </div>
+    <div style="text-align: center;">
+        <button class="start-btn" onclick="startQuiz()">ابدأ التدريب</button>
+    </div>
+</div>
+
+<div class="container hidden" id="quiz-screen">
+    <div class="progress-bar-container"><div id="progress-bar" class="progress-bar"></div></div>
+    <div class="progress-text" id="progress-text"></div>
+    
+    <div id="badge-container"><span class="badge">أسئلة معتمدة من الوزارة</span></div>
+    <div class="question-text" id="question-text"></div>
+    <div id="options-container"></div>
+    <div id="feedback"></div>
+    
+    <div class="next-btn-container">
+        <button id="next-btn" class="hidden" onclick="nextQuestion()">السؤال التالي</button>
+    </div>
+    <div class="year-footer" id="year-footer"></div>
+</div>
+
+<div class="container hidden result-container" id="result-screen">
+    <h2 id="result-title">انتهى التدريب!</h2>
+    <p style="font-size: 1.2rem;" id="student-name-display"></p>
+    <div class="score-display"><span id="score"></span> / <span id="total-score"></span></div>
+    <p id="saving-msg" style="color: #7f8c8d;">جاري حفظ النتيجة في السجل...</p>
+    <button id="retry-btn" class="retry-btn hidden" onclick="retryWrongQuestions()">إعادة حل الأسئلة الخاطئة</button>
+</div>
+
+<div class="teacher-footer">
+    إعداد وتصميم المعلمة الأولى: <strong>أميرة محمد السيد</strong> <br>
+    بمركز جويرية بنت الحارث | للاستفسار: 36837886
+</div>
+
+<script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwStG344rSY9oWOMDAXb2xOavyJpb__dOnohWSVF3gz60-xtYmnm34YKlm40J5sgsrv/exec";
+
+    const allQuestions = [
+        { 
+            q: "استدل من قول الإمام ابن الجزري على أقسام المد من حيث الحكم؟", 
+            options: [
+                "(وَالْمَدُّ لَازِمٌ وَوَاجِبٌ أَتَى ... وَجَائِزٌ وَهْوَ وَقَصْرٌ ثَبَتَا)", 
+                "(فَلَازِمٌ إِنْ جَاءَ بَعْدَ حَرْفِ مَدْ ... سَاكِنُ حَالَيْنِ وَبِالطُّولِ يُمَدِّ)", 
+                "(وَجَائِزٌ إِذَا أَتَى مُنْفَصِلًا ... أَوْ عَرَضَ السُّكُونُ وَقْفًا مُسْجَلًا)"
+            ], 
+            ans: 0, 
+            exp: "أجمل الناظم في هذا البيت أقسام المد الثلاثة من حيث الحكم: لازم، وواجب، وجائز.", 
+            year: "فبراير 2024 / يونيو 2024 / أبريل 2025 / يونيو 2026" 
+        },
+        { 
+            q: "ائت بشاهد من الجزرية على تعريف المد اللازم ومقداره؟", 
+            options: [
+                "(فَلَازِمٌ إِنْ جَاءَ بَعْدَ حَرْفِ مَدْ ... سَاكِنُ حَالَيْنِ وَبِالطُّولِ يُمَدِّ)", 
+                "(وَوَاجِبٌ إِنْ جَاءَ قَبْلَ هَمْزَةِ ... مُتَّصِلاً إِنْ جُمِعَا بِكِلْمَةٍ)", 
+                "(وَالْمَدُّ لَازِمٌ وَوَاجِبٌ أَتَى ... وَجَائِزٌ وَهْوَ وَقَصْرٌ ثَبَتَا)"
+            ], 
+            ans: 0, 
+            exp: "المد اللازم هو ما جاء فيه بعد حرف المد سكون لازم في حالتي الوصل والوقف، ويمد بالطول (6 حركات).", 
+            year: "أبريل 2024 / يونيو 2025 / يونيو 2026" 
+        },
+        { 
+            q: "اشرح قول ابن الجزري: (وبالطول يمد)؟", 
+            options: [
+                "بين الناظم مقدار المد اللازم وهو المد بثلاث ألفات (ست حركات) أو المد المشبع عند الجميع.", 
+                "بين الناظم جواز مد اللازم بالقصر والتوسط والطول عند جميع القراء.", 
+                "بين الناظم أن المد الواجب المتصل يمد بمقدار ست حركات وجوباً."
+            ], 
+            ans: 0, 
+            exp: "اتفق القراء على مد اللازم قدراً واحداً مشبعاً وهو ثلاث ألفات (ست حركات).", 
+            year: "أبريل 2024 / ديسمبر 2024" 
+        },
+        { 
+            q: "استشهد من قول ابن الجزري على تعريف المد المتصل الواجب؟", 
+            options: [
+                "(وَوَاجِبٌ إِنْ جَاءَ قَبْلَ هَمْزَةِ ... مُتَّصِلاً إِنْ جُمِعَا بِكِلْمَةٍ)", 
+                "(وَجَائِزٌ إِذَا أَتَى مُنْفَصِلًا ... أَوْ عَرَضَ السُّكُونُ وَقْفًا مُسْجَلًا)", 
+                "(فَلَازِمٌ إِنْ جَاءَ بَعْدَ حَرْفِ مَدْ ... سَاكِنُ حَالَيْنِ وَبِالطُّولِ يُمَدِّ)"
+            ], 
+            ans: 0, 
+            exp: "المد الواجب المتصل هو أن يجيء حرف المد قبل الهمزة مجتمعين في كلمة واحدة نحو (جَاءَ).", 
+            year: "فبراير 2024 / يونيو 2024 / أغسطس 2025 / يونيو 2026" 
+        },
+        { 
+            q: "اذكر الدليل من المقدمة الجزرية على تعريف المد المنفصل؟", 
+            options: [
+                "(وَجَائِزٌ إِذَا أَتَى مُنْفَصِلًا)", 
+                "(وَوَاجِبٌ إِنْ جَاءَ قَبْلَ هَمْزَةِ ... مُتَّصِلاً إِنْ جُمِعَا بِكِلْمَةٍ)", 
+                "(أَوْ عَرَضَ السُّكُونُ وَقْفًا مُسْجَلًا)"
+            ], 
+            ans: 0, 
+            exp: "يكون المد الجائز منفصلاً بأن يكون حرف المد آخر كلمة والهمز أول كلمة أخرى نحو (إِنَّا أَعْطَيْنَاكَ).", 
+            year: "يونيو 2026" 
+        },
+        { 
+            q: "اشرح قول الناظم: (أو عرض السكون وقفا مسجلا)؟", 
+            options: [
+                "يقصد المد العارض للسكون بنوعيه بسبب الوقف مطلقاً، فيدخل فيه السكون المحض والإشمام، وأما الروم فحكمه حكم الوصل.", 
+                "يقصد المد اللازم الذي يعرض له السكون في حالتي الوصل والوقف.", 
+                "يقصد المد المنفصل إذا وقف القارئ على الهمزة بالسكون والروم."
+            ], 
+            ans: 0, 
+            exp: "مسجلاً أي مطلقاً، ويجوز في العارض للسكون ثلاثة أوجه: الطول، والتوسط، والقصر.", 
+            year: "ديسمبر 2024 / ديسمبر 2025" 
+        },
+        { 
+            q: "سمي المد المتصل بالمد الواجب:", 
+            options: [
+                "لوجوب مده زيادة على مقدار المد الطبيعي عند جميع القراء", 
+                "لانفصال الهمز عن حرف المد في كلمتين", 
+                "لوقوع السكون العارض وقفاً لا وصلاً بعد حرف المد",
+                "لاتفاق القراء على مده بمقدار واحد لا يتغير"
+            ], 
+            ans: 0, 
+            exp: "سمي واجباً لإجماع القراء على مده زيادة على الطبيعي ومنع قصره، وإن اختلفوا في مقداره.", 
+            year: "يونيو 2024 / أغسطس 2025 / فبراير 2026 / يونيو 2026" 
+        },
+        { 
+            q: "سمي المد اللازم بهذا الاسم:", 
+            options: [
+                "للزوم سببه وهو السكون وصلاً ووقفاً، أو للزوم مده وجوباً", 
+                "لعروض المد بعروض السكون وقفاً فقط", 
+                "لإبدال حرف المد من الهمز الساكن",
+                "لاتصال حرف المد بالهمز في كلمة واحدة"
+            ], 
+            ans: 0, 
+            exp: "لزم حالة واحدة في المد (6 حركات) عند كل القراء، ولزم سببه وهو السكون في الحالين.", 
+            year: "فبراير 2024 / ديسمبر 2025 / فبراير 2026" 
+        },
+        { 
+            q: "المد لغة هو الزيادة، واصطلاحاً هو إطالة الصوت بحرف:", 
+            options: [
+                "المد أو اللين", 
+                "الهمس واللين", 
+                "المد والجهر",
+                "المد فقط دون اللين"
+            ], 
+            ans: 0, 
+            exp: "المد في اللغة مطلق الزيادة، وفي الاصطلاح إطالة الصوت بحرف من حروف المد واللين.", 
+            year: "فبراير 2026 / يونيو 2026" 
+        },
+        { 
+            q: "القصر لغة هو الحبس، واصطلاحاً هو إثبات حرف:", 
+            options: [
+                "المد أو اللين من غير زيادة", 
+                "المد مع الزيادة عليه أربع حركات", 
+                "الهمس واللين حال الوقف",
+                "العلة المتحرك بالحركات الثلاث"
+            ], 
+            ans: 0, 
+            exp: "القصر هو الأصل لعدم توقفه على سبب، وهو إثبات ذات حرف المد أو اللين من غير زيادة.", 
+            year: "أبريل 2025 / يونيو 2025 / أكتوبر 2025 / مايو 2026" 
+        },
+        { 
+            q: "يريد الإمام الجزري بقوله: (وقصر) من قوله (وهو وقصر ثبتا) ترك زيادة المد، وإبقاء المد الطبيعي على حاله.", 
+            options: [
+                "صح", 
+                "خطأ"
+            ], 
+            ans: 0, 
+            exp: "ثبتا: الألف فيه للتثنية، أي ثبت المد والقصر في القرآن الكريم.", 
+            year: "فبراير 2024" 
+        },
+        { 
+            q: "المد الزائد على المد الأصلي والذي يتوقف على سبب يعرف بـ:", 
+            options: [
+                "المد الفرعي", 
+                "المد الطبيعي", 
+                "المد الذاتي",
+                "القصر"
+            ], 
+            ans: 0, 
+            exp: "ينقسم المد إلى أصلي (طبيعي) لا يتوقف على سبب، وفرعي يتوقف على سبب من همز أو سكون.", 
+            year: "أغسطس 2025 / ديسمبر 2025 / فبراير 2026" 
+        },
+        { 
+            q: "المد الأصلي يسمى أيضاً بالطبيعي والذاتي والقصر، وضابطه أن لا يقع بعد حرف المد:", 
+            options: [
+                "همزة أو سكون", 
+                "سكون فقط", 
+                "همزة فقط",
+                "حرف مشدد فقط"
+            ], 
+            ans: 0, 
+            exp: "المد الأصلي هو الذي لا تقوم ذات الحرف إلا به، ولا يقع بعده همز ولا سكون.", 
+            year: "فبراير 2025 / أكتوبر 2025 / ديسمبر 2025 / فبراير 2026 / مايو 2026" 
+        },
+        { 
+            q: "للمد الفرعي سببان لفظيان هما الهمزة والسكون، وأقسامه خمسة هي:", 
+            options: [
+                "المتصل، والمنفصل، والبدل، والعارض للسكون، واللازم", 
+                "الطبيعي، والذاتي، واللازم، والمتصل، والمنفصل", 
+                "المتصل، والمنفصل، واللازم فقط"
+            ], 
+            ans: 0, 
+            exp: "أقسام المد الفرعي خمسة: ثلاثة بسبب الهمز (المتصل، المنفصل، البدل) واثنان بسبب السكون (اللازم، والعارض).", 
+            year: "أكتوبر 2025 / ديسمبر 2025" 
+        },
+        { 
+            q: "يفيد الناظم بقوله: (وجائز) أن المد الجائز ينقسم إلى:", 
+            options: [
+                "قسمين (منفصل وعارض للسكون)", 
+                "ثلاثة أقسام", 
+                "أربعة أقسام",
+                "خمسة أقسام"
+            ], 
+            ans: 0, 
+            exp: "أفاد الناظم في البيت (72) أن المد الجائز قسمان: المنفصل، والعارض للسكون.", 
+            year: "أبريل 2024 / مايو 2026" 
+        },
+        { 
+            q: "المد اللازم هو أن يأتي بعد حرف المد سكون لازم وقفاً ووصلاً، ومقدار مده:", 
+            options: [
+                "الطول لا غير عند جميع القراء", 
+                "التوسط لا غير عند جميع القراء", 
+                "القصر والتوسط عند جميع القراء",
+                "القصر لا غير عند جميع القراء"
+            ], 
+            ans: 0, 
+            exp: "يمد المد اللازم بمقدار الطول (6 حركات) وجوباً عند جميع القراء.", 
+            year: "أبريل 2025 / أغسطس 2025 / يونيو 2026" 
+        },
+        { 
+            q: "بين ابن الجزري أن سبب المد المتصل الواجب هو أن يأتي بعد حرف المد همز في كلمة واحدة، ومن أمثلته:", 
+            options: [
+                "جَاءَ", 
+                "يَا أَيُّهَا", 
+                "هَؤُلَاءِ",
+                "وَفِي أَنْفُسِكُمْ"
+            ], 
+            ans: 0, 
+            exp: "في كلمة (جَاءَ) اجتمع حرف المد والهمزة في كلمة واحدة فكان مداً متصلاً واجباً.", 
+            year: "فبراير 2025 / مايو 2026" 
+        },
+        { 
+            q: "المد المنفصل الجائز هو أن يأتي بعد حرف المد همزة منفصلة عنه في كلمة أخرى، ومن أمثلته:", 
+            options: [
+                "يَا أَيُّهَا", 
+                "جَاءَ", 
+                "السُّوءُ",
+                "مَآبٍ"
+            ], 
+            ans: 0, 
+            exp: "(يَا أَيُّهَا) من قبيل المد المنفصل؛ لأن ياء النداء كلمة و(أيها) كلمة أخرى، ومثله (إِنَّا أَعْطَيْنَاكَ).", 
+            year: "أبريل 2025 / يونيو 2025 / مايو 2026 / يونيو 2026" 
+        },
+        { 
+            q: "مقدار المد المتصل الواجب إذا توسطت الهمزة لحفص من طريق الشاطبية:", 
+            options: [
+                "أربع أو خمس حركات", 
+                "أربع أو ست حركات", 
+                "خمس أو ست حركات",
+                "حركتان أو أربع حركات"
+            ], 
+            ans: 0, 
+            exp: "يمد المتصل والمنفصل لحفص من طريق الشاطبية بمقدار أربع أو خمس حركات مع وجوب التسوية بينهما.", 
+            year: "فبراير 2026" 
+        },
+        { 
+            q: "قول الناظم: (وجائز إذا أتى منفصلا) تعريف للمد العارض للسكون.", 
+            options: [
+                "خطأ (تعريف للمد المنفصل)", 
+                "صح"
+            ], 
+            ans: 0, 
+            exp: "قوله (وجائز إذا أتى منفصلا) تعريف للمد المنفصل، بينما (أو عرض السكون وقفا مسجلا) تعريف للعارض للسكون.", 
+            year: "يونيو 2024 / يونيو 2026" 
+        }
+    ];
+
+    let studentName = "";
+    let score = 0;
+    let currentQuestionIndex = 0;
+    let activeQuestions = [];
+    let wrongQuestionsLog = []; 
+    let wrongQuestionsObjects = []; 
+    let isRetryMode = false;
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function startQuiz() {
+        const nameInput = document.getElementById("student-name").value.trim();
+        if (nameInput === "") { alert("يرجى إدخال اسمك للمتابعة."); return; }
+        
+        studentName = nameInput; 
+        activeQuestions = shuffleArray([...allQuestions]);
+        
+        document.getElementById("login-screen").classList.add("hidden");
+        document.getElementById("quiz-screen").classList.remove("hidden");
+        
+        score = 0; wrongQuestionsLog = []; wrongQuestionsObjects = []; currentQuestionIndex = 0;
+        loadQuestion();
+    }
+
+    function updateProgressBar() {
+        const progressPercentage = (currentQuestionIndex / activeQuestions.length) * 100;
+        document.getElementById("progress-bar").style.width = progressPercentage + "%";
+        document.getElementById("progress-text").innerText = `السؤال ${currentQuestionIndex + 1} من ${activeQuestions.length}`;
+    }
+
+    function loadQuestion() {
+        document.getElementById("feedback").style.display = "none";
+        document.getElementById("next-btn").classList.add("hidden");
+        updateProgressBar();
+        const q = activeQuestions[currentQuestionIndex];
+        
+        document.getElementById("question-text").innerText = q.q;
+        document.getElementById("year-footer").innerText = `المصدر: اختبارات (${q.year})`;
+        
+        const optionsContainer = document.getElementById("options-container");
+        optionsContainer.innerHTML = "";
+        
+        let shuffledOptions = q.options.map((opt, index) => ({ text: opt, originalIndex: index }));
+        shuffledOptions = shuffleArray(shuffledOptions);
+        
+        shuffledOptions.forEach((optObj) => {
+            const btn = document.createElement("button");
+            btn.innerText = optObj.text;
+            btn.className = "option-btn";
+            btn.onclick = () => checkAnswer(optObj.originalIndex, btn);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(selectedOriginalIndex, btnElement) {
+        const buttons = document.querySelectorAll(".option-btn");
+        buttons.forEach(b => b.disabled = true);
+        const q = activeQuestions[currentQuestionIndex];
+        const feedbackDiv = document.getElementById("feedback");
+        feedbackDiv.style.display = "block";
+
+        if (selectedOriginalIndex === q.ans) {
+            btnElement.classList.add("correct");
+            feedbackDiv.style.backgroundColor = "#e8f5e9";
+            feedbackDiv.style.color = "#2e7d32";
+            feedbackDiv.innerText = "إجابة صحيحة ✔️\nالتعليل: " + q.exp;
+            if (!isRetryMode) score += 2; 
+        } else {
+            btnElement.classList.add("wrong");
+            buttons.forEach(b => { if (b.innerText === q.options[q.ans]) b.classList.add("correct"); });
+            feedbackDiv.style.backgroundColor = "#ffebee";
+            feedbackDiv.style.color = "#c62828";
+            feedbackDiv.innerText = "إجابة خاطئة ❌\nالصواب: " + q.options[q.ans];
+            if (!isRetryMode) { wrongQuestionsLog.push(q.q); wrongQuestionsObjects.push(q); }
+        }
+        document.getElementById("next-btn").classList.remove("hidden");
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < activeQuestions.length) loadQuestion();
+        else endQuiz();
+    }
+
+    function endQuiz() {
+        document.getElementById("quiz-screen").classList.add("hidden");
+        document.getElementById("result-screen").classList.remove("hidden");
+        document.getElementById("progress-bar").style.width = "100%";
+        
+        document.getElementById("student-name-display").innerText = "الطالبة: " + studentName;
+        document.getElementById("score").innerText = score;
+        const totalPossible = isRetryMode ? score : (activeQuestions.length * 2); 
+        document.getElementById("total-score").innerText = activeQuestions.length * 2;
+
+        const retryBtn = document.getElementById("retry-btn");
+        if (wrongQuestionsObjects.length > 0 && !isRetryMode) {
+            document.getElementById("result-title").innerText = "يوجد أخطاء تحتاج للتصحيح!";
+            retryBtn.classList.remove("hidden");
+        } else {
+            document.getElementById("result-title").innerText = "عمل رائع! التدريب مكتمل بنجاح.";
+            retryBtn.classList.add("hidden");
+        }
+
+        if (!isRetryMode) sendDataToSheet(totalPossible);
+        else document.getElementById("saving-msg").classList.add("hidden");
+    }
+
+    function retryWrongQuestions() {
+        isRetryMode = true;
+        activeQuestions = shuffleArray([...wrongQuestionsObjects]);
+        wrongQuestionsObjects = [];
+        currentQuestionIndex = 0;
+        document.getElementById("result-screen").classList.add("hidden");
+        document.getElementById("quiz-screen").classList.remove("hidden");
+        loadQuestion();
+    }
+
+    function sendDataToSheet(totalPossible) {
+        const payload = { name: studentName + " (أحكام المد)", score: score, total: totalPossible, wrongQuestions: wrongQuestionsLog };
+        fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        .then(() => {
+            document.getElementById("saving-msg").innerText = "تم حفظ النتيجة بنجاح في سجل المعلمة ✔️";
+            document.getElementById("saving-msg").style.color = "#27ae60";
+        }).catch(err => {
+            document.getElementById("saving-msg").innerText = "حدث خطأ أثناء حفظ النتيجة.";
+            document.getElementById("saving-msg").style.color = "#e74c3c";
+        });
+    }
+</script>
+</body>
+</html>
